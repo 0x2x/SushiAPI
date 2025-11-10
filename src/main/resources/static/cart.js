@@ -88,6 +88,12 @@ function clearCart() {
     }
 }
 
-// pay item
+// pay cart
 function payCart() {
+    const options = {method: 'POST', headers: {'User-Agent': 'insomnia/12.0.0'}};
+
+    fetch('http://localhost:8080/api/order/pay', options)
+      .then(response => response.json())
+      .then(response => console.log(response))
+      .catch(err => console.error(err));
 }

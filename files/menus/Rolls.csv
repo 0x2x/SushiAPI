@@ -1,4 +1,4 @@
-name|price|available|ingredients|raw
-Crystal Roll|7|true|spicy scallop, crunchy, masago, tempura shrimp, asparagus, rolled in soy wrap, w/house special creamy sauce, eel sauce, bonito flake|true
-Hulk Roll|7|true|salmon, yellowtail, jalapeno, topped w/yellowtail, avocado, wasabi tobiko, honey wasabi mayo|true
-Fuji Roll|7|true|Spicy tuna, crunchy topped w/salmon, avocado, tobikko arare, spicy mayo|true
+name|price|available|ingredients|raw|extra
+Crystal Roll|7|true|spicy scallop, crunchy, masago, tempura shrimp, asparagus, rolled in soy wrap, w/house special creamy sauce, eel sauce, bonito flake|true|null
+Hulk Roll|7|true|salmon, yellowtail, jalapeno, topped w/yellowtail, avocado, wasabi tobiko, honey wasabi mayo|true|null
+Fuji Roll|7|true|Spicy tuna, crunchy topped w/salmon, avocado, tobikko arare, spicy mayo|true|null

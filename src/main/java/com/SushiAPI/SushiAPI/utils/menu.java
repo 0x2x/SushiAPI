@@ -2,6 +2,9 @@ package com.SushiAPI.SushiAPI.utils;
 
 import com.SushiAPI.SushiAPI.main;
 import com.SushiAPI.SushiAPI.models.Item;
+import com.SushiAPI.SushiAPI.models.appetizers.appetizers;
+import com.SushiAPI.SushiAPI.models.drinks.Drink;
+import com.SushiAPI.SushiAPI.models.rolls.Roll;
 
 import static com.SushiAPI.SushiAPI.utils.Files.readFile;
 
@@ -21,7 +24,7 @@ public class menu {
             double price = Double.parseDouble(fields[1].trim());
             int quantity = Integer.parseInt(fields[2].trim());
             boolean hot = Boolean.parseBoolean(fields[3].trim());
-            main.items.add(new Item(name, price, true, hot, false, false));
+            main.items.add(new Drink(name, price, hot, ""));
         }
         // load rolls
         // name|price|available|ingredients|raw
@@ -33,7 +36,7 @@ public class menu {
             String name = fields[0].trim();
             double price = Double.parseDouble(fields[1].trim());
             boolean raw = Boolean.parseBoolean(fields[4].trim());
-            main.items.add(new Item(name, price, false, false, false, raw));
+            main.items.add(new Roll(name, price, false, false, false, raw, null, null));
         }
         // load appetizers
         // name|price|description|hot
@@ -45,7 +48,7 @@ public class menu {
             String name = fields[0].trim();
             double price = Double.parseDouble(fields[1].trim());
             boolean hot = Boolean.parseBoolean(fields[3].trim());
-            main.items.add(new Item(name, price, false, hot, false, false));
+            main.items.add(new appetizers(name, price, false, hot, true, false, null, null));
         }
     }
 }

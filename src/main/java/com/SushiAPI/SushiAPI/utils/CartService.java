@@ -34,8 +34,11 @@ public class CartService {
         }
         return totalAmount + tip;
     }
+
     public static boolean pay() {
-        return false;
+        main.ReceiptItems.addAll(main.Cart); // add to paid items
+        main.Cart.clear(); // remove everything from cart
+        return true;
     }
 
     public static ArrayList<Item> searchItems(String searchQuery) {

@@ -437,26 +437,22 @@
 
 <script>
     // Menu Data
-    const menuData = {
-        nigiri: [
-            { id: 1, name: 'Salmon Nigiri', description: 'Fresh Atlantic salmon over pressed sushi rice', price: 6.50, image: '/placeholder.svg?height=200&width=300' },
-            { id: 2, name: 'Tuna Nigiri', description: 'Premium bluefin tuna with wasabi', price: 7.50, image: '/placeholder.svg?height=200&width=300' },
-            { id: 3, name: 'Yellowtail Nigiri', description: 'Buttery yellowtail with scallions', price: 7.00, image: '/placeholder.svg?height=200&width=300' },
-            { id: 4, name: 'Eel Nigiri', description: 'Grilled freshwater eel with sweet sauce', price: 8.00, image: '/placeholder.svg?height=200&width=300' }
-        ],
-        maki: [
-            { id: 5, name: 'California Roll', description: 'Crab, avocado, cucumber with sesame seeds', price: 9.00, image: '/placeholder.svg?height=200&width=300' },
-            { id: 6, name: 'Spicy Tuna Roll', description: 'Spicy tuna mix with cucumber', price: 10.00, image: '/placeholder.svg?height=200&width=300' },
-            { id: 7, name: 'Salmon Avocado Roll', description: 'Fresh salmon with creamy avocado', price: 11.00, image: '/placeholder.svg?height=200&width=300' },
-            { id: 8, name: 'Vegetable Roll', description: 'Cucumber, avocado, carrot, and pickled radish', price: 8.00, image: '/placeholder.svg?height=200&width=300' }
-        ],
-        special: [
-            { id: 9, name: 'Dragon Roll', description: 'Eel, cucumber topped with avocado and eel sauce', price: 15.00, image: '/placeholder.svg?height=200&width=300' },
-            { id: 10, name: 'Rainbow Roll', description: 'California roll topped with assorted fish', price: 16.00, image: '/placeholder.svg?height=200&width=300' },
-            { id: 11, name: 'Spider Roll', description: 'Soft shell crab tempura with avocado and spicy mayo', price: 14.00, image: '/placeholder.svg?height=200&width=300' },
-            { id: 12, name: 'Volcano Roll', description: 'Baked seafood with spicy sauce over California roll', price: 17.00, image: '/placeholder.svg?height=200&width=300' }
-        ]
+    let menuData = {};
+
+    const settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "http://localhost:8080/api/menu",
+        "method": "GET",
+        "headers": {
+            "User-Agent": "insomnia/12.0.0"
+        }
     };
+    $.ajax(settings).done(function (response) {
+        menuData = response;
+        Object.assign(menuData, response);
+    });
+    console.log(menuData)
 
     // Cart State
     let cart = [];
@@ -498,11 +494,20 @@
         } else {
             cart.push({ ...item, quantity: 1 });
         }
+
         // api request
+        const bodyData = {
+            name: item.name,
+            price: item.price,
+            isDrink: false,
+            isHot: false,
+            isAppetizer: false,
+            isRaw: false
+        }
         const options = {
           method: 'POST',
           headers: {'Content-Type': 'application/json', 'User-Agent': navigator.userAgent},
-          body: '{"name":"","price":"","isDrink":false,"isHot":false,"isAppetizer":false,"isRaw":false}'
+          body: JSON.stringify(bodyData)
         };
 
         fetch('http://localhost:8080/api/cart/add', options)
@@ -592,7 +597,8 @@
             cart = [];
             updateCart();
             toggleCart();
-
+        } else {
+            alert(`You currently have ${cart.length} items inside of your cart. Please add something to checkout.`)
         }
     }
 

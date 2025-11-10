@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paper Receipt</title>
+    <style>
+        body {
+          margin: 0;
+          padding: 40px;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: 'Courier New', monospace;
+        }
+
+        .receipt {
+          width: 320px;
+          padding: 30px 20px;
+          background: #fdfdf8;
+          background-image:
+            repeating-linear-gradient(
+              0deg,
+              rgba(0, 0, 0, 0.03) 0px,
+              transparent 1px,
+              transparent 2px,
+              rgba(0, 0, 0, 0.03) 3px
+            );
+          box-shadow:
+            0 10px 30px rgba(0, 0, 0, 0.3),
+            0 1px 3px rgba(0, 0, 0, 0.2),
+            inset 0 0 100px rgba(255, 255, 255, 0.3);
+          border-radius: 3px;
+          position: relative;
+          border: 1px solid #e8e8e0;
+        }
+
+        .receipt::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 20px;
+          background: repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 10px,
+            #ddd 10px,
+            #ddd 11px
+          );
+          border-radius: 3px 3px 0 0;
+        }
+
+        .receipt::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 20px;
+          background: repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 10px,
+            #ddd 10px,
+            #ddd 11px
+          );
+          border-radius: 0 0 3px 3px;
+        }
+
+        .receipt-content {
+          padding: 10px 0;
+        }
+
+        .store-name {
+          text-align: center;
+          font-size: 20px;
+          font-weight: bold;
+          margin-bottom: 5px;
+          letter-spacing: 1px;
+        }
+
+        .store-info {
+          text-align: center;
+          font-size: 11px;
+          margin-bottom: 20px;
+          color: #333;
+          line-height: 1.4;
+        }
+
+        .divider {
+          border-top: 1px dashed #666;
+          margin: 15px 0;
+        }
+
+        .receipt-row {
+          display: flex;
+          justify-content: space-between;
+          margin: 8px 0;
+          font-size: 13px;
+        }
+
+        .item-name {
+          flex: 1;
+        }
+
+        .item-price {
+          text-align: right;
+          min-width: 60px;
+        }
+
+        .total-section {
+          margin-top: 15px;
+          padding-top: 10px;
+          border-top: 2px solid #333;
+        }
+
+        .total-row {
+          display: flex;
+          justify-content: space-between;
+          margin: 10px 0;
+          font-size: 14px;
+        }
+
+        .total-row.grand-total {
+          font-size: 16px;
+          font-weight: bold;
+          margin-top: 8px;
+          padding-top: 8px;
+          border-top: 2px solid #333;
+        }
+
+        .footer {
+          text-align: center;
+          margin-top: 20px;
+          font-size: 11px;
+          color: #555;
+        }
+
+        .thank-you {
+          text-align: center;
+          font-size: 14px;
+          font-weight: bold;
+          margin-top: 15px;
+          letter-spacing: 2px;
+        }
+
+        .barcode {
+          margin: 15px auto;
+          text-align: center;
+        }
+
+        .barcode-img {
+          height: 50px;
+          background: repeating-linear-gradient(
+            90deg,
+            #000 0px,
+            #000 2px,
+            transparent 2px,
+            transparent 4px,
+            #000 4px,
+            #000 5px,
+            transparent 5px,
+            transparent 8px,
+            #000 8px,
+            #000 10px,
+            transparent 10px,
+            transparent 11px
+          );
+          width: 200px;
+          margin: 0 auto;
+        }
+
+        .barcode-number {
+          font-size: 10px;
+          margin-top: 5px;
+          letter-spacing: 3px;
+        }
+    </style>
+</head>
+<body>
+<div class="receipt">
+    <div class="receipt-content">
+        <div class="store-name">GROCERY MART</div>
+        <div class="store-info">
+            123 Main Street<br>
+            Anytown, ST 12345<br>
+            Tel: (555) 123-4567
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="receipt-row">
+            <span>Date: 01/10/2025</span>
+            <span>Time: 14:32</span>
+        </div>
+        <div class="receipt-row">
+            <span>Receipt #: 00789</span>
+        </div>
+        <div class="receipt-row">
+            <span>Cashier: Sarah M.</span>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="receipt-row">
+            <span class="item-name">Organic Bananas</span>
+            <span class="item-price">$3.99</span>
+        </div>
+        <div class="receipt-row">
+            <span class="item-name">Whole Milk (1gal)</span>
+            <span class="item-price">$4.29</span>
+        </div>
+        <div class="receipt-row">
+            <span class="item-name">Bread - Whole Wheat</span>
+            <span class="item-price">$2.99</span>
+        </div>
+        <div class="receipt-row">
+            <span class="item-name">Free Range Eggs</span>
+            <span class="item-price">$5.49</span>
+        </div>
+        <div class="receipt-row">
+            <span class="item-name">Organic Tomatoes</span>
+            <span class="item-price">$6.99</span>
+        </div>
+        <div class="receipt-row">
+            <span class="item-name">Greek Yogurt</span>
+            <span class="item-price">$4.99</span>
+        </div>
+
+        <div class="total-section">
+            <div class="total-row">
+                <span>Subtotal:</span>
+                <span>$28.74</span>
+            </div>
+            <div class="total-row">
+                <span>Tax (8.5%):</span>
+                <span>$2.44</span>
+            </div>
+            <div class="total-row grand-total">
+                <span>TOTAL:</span>
+                <span>$31.18</span>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="receipt-row">
+            <span>Payment Method:</span>
+            <span>VISA **** 4532</span>
+        </div>
+        <div class="receipt-row">
+            <span>Amount Paid:</span>
+            <span>$31.18</span>
+        </div>
+
+        <div class="barcode">
+            <div class="barcode-img"></div>
+            <div class="barcode-number">* 1234567890123 *</div>
+        </div>
+
+        <div class="thank-you">THANK YOU!</div>
+
+        <div class="footer">
+            Please retain this receipt for your records<br>
+            Return policy: 30 days with receipt<br>
+            www.grocerymart.com
+        </div>
+    </div>
+</div>
+</body>
+</html>

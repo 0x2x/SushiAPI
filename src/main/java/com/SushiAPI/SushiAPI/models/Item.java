@@ -1,14 +1,20 @@
 package com.SushiAPI.SushiAPI.models;
 
-public class Item {
-    private String name;
+import com.SushiAPI.SushiAPI.models.extra.Extra;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public abstract class Item {
+    protected String name;
     private double price;
     private boolean isDrink;
     private boolean isHot;
     private boolean isAppetizer;
     private boolean isRaw;
+    private List<Extra> extras; // allows users to add extra spicy mayo, side of white rice, gluten-free soysauce
     // Constructor
-    public Item(String name, double price, boolean isDrink, boolean isHot, boolean isAppetizer, boolean isRaw) {
+    protected Item(String name, double price, boolean isDrink, boolean isHot, boolean isAppetizer, boolean isRaw) {
         this.name = name;
         this.price = price;
         this.isDrink = isDrink;
@@ -16,7 +22,13 @@ public class Item {
         this.isAppetizer = isAppetizer;
         this.isRaw = isRaw;
     }
-    // getters and setters
+
+    public Item(String name, double price, boolean isDrink, boolean isHot, boolean isAppetizer, boolean isRaw, List<Extra> extras) {
+        this(name, price, isDrink, isHot, isAppetizer, isRaw);
+        this.extras = extras;
+    }
+
+    // shared
 
     public String getName() {
         return name;
@@ -34,35 +46,11 @@ public class Item {
         this.price = price;
     }
 
-    public boolean isDrink() {
-        return isDrink;
+    public List<Extra> getExtras() {
+        return extras;
     }
 
-    public void setDrink(boolean drink) {
-        isDrink = drink;
-    }
-
-    public boolean isHot() {
-        return isHot;
-    }
-
-    public void setHot(boolean hot) {
-        isHot = hot;
-    }
-
-    public boolean isAppetizer() {
-        return isAppetizer;
-    }
-
-    public void setAppetizer(boolean appetizer) {
-        isAppetizer = appetizer;
-    }
-
-    public boolean isRaw() {
-        return isRaw;
-    }
-
-    public void setRaw(boolean raw) {
-        isRaw = raw;
-    }
+    public void setExtras(List<Extra> extras) {this.extras = extras;}
+    //
+    public abstract String getCategory();
 }
