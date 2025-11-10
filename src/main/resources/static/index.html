@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sakura Sushi - Menu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #FAF8F5;
+            color: #1A1A1A;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: #FFFFFF;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            color: #1A1A1A;
+        }
+
+        .cart-btn {
+            position: relative;
+            background: #2D5740;
+            color: #FFFFFF;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .cart-btn:hover {
+            background: #234430;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #C85A54;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem 3rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+            color: #1A1A1A;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Menu Grid */
+        .menu-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .category {
+            margin-bottom: 4rem;
+        }
+
+        .category-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #1A1A1A;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-item {
+            background: #FFFFFF;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .item-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: #F5F5F5;
+        }
+
+        .item-info {
+            padding: 1.5rem;
+        }
+
+        .item-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1A1A1A;
+        }
+
+        .item-description {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .item-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item-price {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #2D5740;
+        }
+
+        .add-to-cart {
+            background: #2D5740;
+            color: white;
+            border: none;
+            padding: 0.625rem 1.25rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .add-to-cart:hover {
+            background: #234430;
+        }
+
+        /* Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 400px;
+            height: 100vh;
+            background: #FFFFFF;
+            box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15);
+            transition: right 0.3s ease;
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.open {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 2rem;
+            border-bottom: 1px solid #E5E5E5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+            padding: 0.5rem;
+            line-height: 1;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem 2rem;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #E5E5E5;
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            background: #F5F5F5;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: #1A1A1A;
+        }
+
+        .cart-item-price {
+            color: #2D5740;
+            font-weight: 500;
+        }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .qty-btn {
+            background: #F5F5F5;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .qty-btn:hover {
+            background: #E5E5E5;
+        }
+
+        .qty {
+            min-width: 30px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .remove-btn {
+            background: none;
+            border: none;
+            color: #C85A54;
+            cursor: pointer;
+            font-size: 0.85rem;
+            margin-left: auto;
+            padding: 0.25rem 0.5rem;
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: #999;
+        }
+
+        .cart-footer {
+            padding: 2rem;
+            border-top: 1px solid #E5E5E5;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: #2D5740;
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .checkout-btn:hover {
+            background: #234430;
+        }
+
+        .checkout-btn:disabled {
+            background: #CCC;
+            cursor: not-allowed;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            z-index: 150;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+
+            header {
+                padding: 1rem;
+            }
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+<header>
+    <div class="logo">Sakura Sushi</div>
+    <button class="cart-btn" onclick="toggleCart()">
+        <span>Cart</span>
+        <span class="cart-count" id="cartCount">0</span>
+    </button>
+</header>
+
+<div class="hero">
+    <h1>Fresh Japanese Cuisine</h1>
+    <p>Experience authentic flavors with our carefully crafted sushi selection, made fresh daily with premium ingredients</p>
+</div>
+
+<div class="menu-container">
+    <div class="category">
+        <h2 class="category-title">Nigiri</h2>
+        <div class="menu-grid" id="nigiriGrid"></div>
+    </div>
+
+    <div class="category">
+        <h2 class="category-title">Maki Rolls</h2>
+        <div class="menu-grid" id="makiGrid"></div>
+    </div>
+
+    <div class="category">
+        <h2 class="category-title">Special Rolls</h2>
+        <div class="menu-grid" id="specialGrid"></div>
+    </div>
+</div>
+
+<div class="overlay" id="overlay" onclick="toggleCart()"></div>
+
+<div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+        <h2>Your Order</h2>
+        <button class="close-cart" onclick="toggleCart()">&times;</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+        <div class="cart-empty">Your cart is empty</div>
+    </div>
+    <div class="cart-footer">
+        <div class="cart-total">
+            <span>Total:</span>
+            <span id="cartTotal">$0.00</span>
+        </div>
+        <button class="checkout-btn" id="checkoutBtn" disabled onclick="checkout()">
+            Checkout
+        </button>
+    </div>
+</div>
+
+<script>
+    // Menu Data
+    const menuData = {
+        nigiri: [
+            { id: 1, name: 'Salmon Nigiri', description: 'Fresh Atlantic salmon over pressed sushi rice', price: 6.50, image: '/placeholder.svg?height=200&width=300' },
+            { id: 2, name: 'Tuna Nigiri', description: 'Premium bluefin tuna with wasabi', price: 7.50, image: '/placeholder.svg?height=200&width=300' },
+            { id: 3, name: 'Yellowtail Nigiri', description: 'Buttery yellowtail with scallions', price: 7.00, image: '/placeholder.svg?height=200&width=300' },
+            { id: 4, name: 'Eel Nigiri', description: 'Grilled freshwater eel with sweet sauce', price: 8.00, image: '/placeholder.svg?height=200&width=300' }
+        ],
+        maki: [
+            { id: 5, name: 'California Roll', description: 'Crab, avocado, cucumber with sesame seeds', price: 9.00, image: '/placeholder.svg?height=200&width=300' },
+            { id: 6, name: 'Spicy Tuna Roll', description: 'Spicy tuna mix with cucumber', price: 10.00, image: '/placeholder.svg?height=200&width=300' },
+            { id: 7, name: 'Salmon Avocado Roll', description: 'Fresh salmon with creamy avocado', price: 11.00, image: '/placeholder.svg?height=200&width=300' },
+            { id: 8, name: 'Vegetable Roll', description: 'Cucumber, avocado, carrot, and pickled radish', price: 8.00, image: '/placeholder.svg?height=200&width=300' }
+        ],
+        special: [
+            { id: 9, name: 'Dragon Roll', description: 'Eel, cucumber topped with avocado and eel sauce', price: 15.00, image: '/placeholder.svg?height=200&width=300' },
+            { id: 10, name: 'Rainbow Roll', description: 'California roll topped with assorted fish', price: 16.00, image: '/placeholder.svg?height=200&width=300' },
+            { id: 11, name: 'Spider Roll', description: 'Soft shell crab tempura with avocado and spicy mayo', price: 14.00, image: '/placeholder.svg?height=200&width=300' },
+            { id: 12, name: 'Volcano Roll', description: 'Baked seafood with spicy sauce over California roll', price: 17.00, image: '/placeholder.svg?height=200&width=300' }
+        ]
+    };
+
+    // Cart State
+    let cart = [];
+
+    // Render Menu Items
+    function renderMenu() {
+        renderCategory('nigiri', 'nigiriGrid');
+        renderCategory('maki', 'makiGrid');
+        renderCategory('special', 'specialGrid');
+    }
+
+    function renderCategory(category, gridId) {
+        const grid = document.getElementById(gridId);
+        grid.innerHTML = menuData[category].map(item => `
+            <div class="menu-item">
+                <img src="${item.image}" alt="${item.name}" class="item-image">
+                <div class="item-info">
+                    <h3 class="item-name">${item.name}</h3>
+                    <p class="item-description">${item.description}</p>
+                    <div class="item-footer">
+                        <span class="item-price">$${item.price.toFixed(2)}</span>
+                        <button class="add-to-cart" onclick="addToCart(${item.id})">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // Cart Functions
+    function addToCart(itemId) {
+        const allItems = [...menuData.nigiri, ...menuData.maki, ...menuData.special];
+        const item = allItems.find(i => i.id === itemId);
+
+        const existingItem = cart.find(i => i.id === itemId);
+        if (existingItem) {
+            existingItem.quantity++;
+        } else {
+            cart.push({ ...item, quantity: 1 });
+        }
+        // api request
+        const options = {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json', 'User-Agent': navigator.userAgent},
+          body: '{"name":"","price":"","isDrink":false,"isHot":false,"isAppetizer":false,"isRaw":false}'
+        };
+
+        fetch('http://localhost:8080/api/cart/add', options)
+          .then(response => response.json())
+          .then(response => console.log(response))
+          .catch(err => console.error(err));
+
+        updateCart();
+    }
+
+    function updateQuantity(itemId, delta) {
+        const item = cart.find(i => i.id === itemId);
+        if (item) {
+            item.quantity += delta;
+            if (item.quantity <= 0) {
+                removeFromCart(itemId);
+            } else {
+                updateCart();
+            }
+        }
+    }
+
+    function removeFromCart(itemId) {
+        cart = cart.filter(i => i.id !== itemId);
+        updateCart();
+    }
+
+    function updateCart() {
+        const cartCount = document.getElementById('cartCount');
+        const cartItems = document.getElementById('cartItems');
+        const cartTotal = document.getElementById('cartTotal');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+        cartCount.textContent = totalItems;
+        cartTotal.textContent = `$${totalPrice.toFixed(2)}`;
+
+        if (cart.length === 0) {
+            cartItems.innerHTML = '<div class="cart-empty">Your cart is empty</div>';
+            checkoutBtn.disabled = true;
+        } else {
+            cartItems.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+                        <div class="cart-item-controls">
+                            <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">−</button>
+                            <span class="qty">${item.quantity}</span>
+                            <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                            <button class="remove-btn" onclick="removeFromCart(${item.id})">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            checkoutBtn.disabled = false;
+        }
+    }
+
+    function toggleCart() {
+        const sidebar = document.getElementById('cartSidebar');
+        const overlay = document.getElementById('overlay');
+        sidebar.classList.toggle('open');
+        overlay.classList.toggle('active');
+    }
+
+    function checkout() {
+        if (cart.length > 0) {
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const settings = {
+              "async": true,
+              "crossDomain": true,
+              "url": "http://localhost:8080/api/order/pay",
+              "method": "POST",
+              "headers": {
+                "User-Agent": "insomnia/12.0.0"
+              }
+            };
+
+            $.ajax(settings).done(function (response) {
+              console.log(response);
+            });
+            alert(`Thank you for your order!\n\nTotal: $${total.toFixed(2)}\n\nYour delicious sushi will be ready soon!`);
+            cart = [];
+            updateCart();
+            toggleCart();
+
+        }
+    }
+
+    // Initialize
+    renderMenu();
+</script>
+</body>
+this design was made by CHATGPT
+</html>
