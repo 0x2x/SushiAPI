@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,9 +21,9 @@ import java.util.Map;
 @RestController
 public class MenuController {
     @GetMapping("/api/menu")
-    public ResponseEntity<ArrayList<Map<String, Item>>> getMenu() {
-        ArrayList<Map<String, Item>> items = MenuServices.getMenuItems();
-        return new ResponseEntity<ArrayList<Map<String, Item>>>(items, HttpStatus.OK);
+    public ResponseEntity<HashMap<String, ArrayList<Item>>> getMenu() {
+        HashMap<String, ArrayList<Item>> items = MenuServices.getMenuItems();
+        return new ResponseEntity<HashMap<String, ArrayList<Item>>>(items, HttpStatus.OK);
     }
 
     @GetMapping("/api/menu/filter/") // api/menu/filter?search

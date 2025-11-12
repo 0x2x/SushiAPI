@@ -37,6 +37,7 @@ public class CartService {
 
     public static boolean pay() {
         main.ReceiptItems.addAll(main.Cart); // add to paid items
+        ReceiptService.saveItems();
         main.Cart.clear(); // remove everything from cart
         return true;
     }

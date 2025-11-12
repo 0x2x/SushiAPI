@@ -16,4 +16,12 @@ public class ReceiptService {
         });
         return items;
     }
+
+    public static void saveItems() {
+        main.ReceiptItems.forEach(item -> {
+            HashMap<String, Item> itemHashMap = new HashMap<>();
+            itemHashMap.put("testing", item);
+            items.add(itemHashMap);
+        });
+    }
 }

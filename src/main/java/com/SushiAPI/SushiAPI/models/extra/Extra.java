@@ -14,9 +14,9 @@ public class Extra{
     private String name;
 
     public Extra( String name) {
-        if(!VALID_CHOICES.contains(name.toLowerCase())) {
-            throw new IllegalArgumentException("Invalid Extra" + name);
-        }
+//        if(!VALID_CHOICES.contains(name.toLowerCase())) {
+//            throw new IllegalArgumentException("Invalid Extra" + name);
+//        }
         this.name = name.toLowerCase();
     }
 
@@ -25,9 +25,9 @@ public class Extra{
     }
 
     public void setName(String name) {
-        if(!VALID_CHOICES.contains(name.toLowerCase())) {
-            throw new IllegalArgumentException("Invalid Extra" + name);
-        }
+//        if(!VALID_CHOICES.contains(name.toLowerCase())) {
+//            throw new IllegalArgumentException("Invalid Extra" + name);
+//        }
         this.name = name.toLowerCase();
     }
 

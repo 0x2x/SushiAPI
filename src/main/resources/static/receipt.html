@@ -184,7 +184,7 @@
 <body>
 <div class="receipt">
     <div class="receipt-content">
-        <div class="store-name">GROCERY MART</div>
+        <div class="store-name">AI SUSHI </div>
         <div class="store-info">
             123 Main Street<br>
             Anytown, ST 12345<br>
@@ -194,14 +194,14 @@
         <div class="divider"></div>
 
         <div class="receipt-row">
-            <span>Date: 01/10/2025</span>
-            <span>Time: 14:32</span>
+            <span id="date-now"></span>
+            <span id="time-now"></span>
         </div>
         <div class="receipt-row">
-            <span>Receipt #: 00789</span>
+            <span id="generatedReceipt"></span>
         </div>
         <div class="receipt-row">
-            <span>Cashier: Sarah M.</span>
+            <span>Cashier: Online Website</span>
         </div>
 
         <div class="divider"></div>
@@ -273,3 +273,28 @@
 </div>
 </body>
 </html>
+<script>
+  let DateNow = document.getElementById("date-now");
+  let TimeNow = document.getElementById("time-now");
+  let receiptId = document.getElementById("generatedReceipt")
+  let generateReceiptId = Math.round(Math.random() * 9999);
+
+
+  const today = new Date();
+  let day = today.getDate();
+  let month = today.getMonth() + 1;
+  let year = today.getFullYear();
+  day = day < 10 ? '0' + day : day;
+  month = month < 10 ? '0' + month : month;
+  const formattedDate = `${day}/${month}/${year}`;
+  DateNow.innerText = "Date: " + formattedDate;
+
+  const hour = today.getHours();
+  const mins = today.getMinutes();
+  const formattedTime = `${hour}:${mins}`;
+  TimeNow.innerHTML = "Time: " + formattedTime;
+
+  receiptId.innerText = "Receipt #: " + generateReceiptId
+
+
+</script>

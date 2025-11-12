@@ -10,14 +10,18 @@ import java.util.Map;
 
 public class MenuServices implements com.SushiAPI.SushiAPI.models.menu {
 
-    public static ArrayList<Map<String, Item>> getMenuItems() {
-        ArrayList<Map<String, Item>> menuItems = new ArrayList<>();
-        main.items.forEach(item -> {
-            Map<String, Item> Data = new HashMap<>();
-            Data.put(item.getCategory(), item);
-            menuItems.add(Data);
-        });
-        System.out.println(menuItems);
+    public static HashMap<String, ArrayList<Item>> getMenuItems() {
+        HashMap<String, ArrayList<Item>> menuItems = new HashMap<>();
+        int index = 0;
+        for(Item item : main.items) {
+            String category = item.getCategory();
+            if(!menuItems.containsKey(category)) {
+                menuItems.put(category, new ArrayList<>());
+            }
+            item.setId(index);
+            index++;
+            menuItems.get(category).add(item);
+        }
         return menuItems;
     }
 

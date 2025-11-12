@@ -12,6 +12,7 @@ public abstract class Item {
     private boolean isHot;
     private boolean isAppetizer;
     private boolean isRaw;
+    private int id;
     private List<Extra> extras; // allows users to add extra spicy mayo, side of white rice, gluten-free soysauce
     // Constructor
     protected Item(String name, double price, boolean isDrink, boolean isHot, boolean isAppetizer, boolean isRaw) {
@@ -51,6 +52,15 @@ public abstract class Item {
     }
 
     public void setExtras(List<Extra> extras) {this.extras = extras;}
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     //
     public abstract String getCategory();
 }

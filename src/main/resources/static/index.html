@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sakura Sushi - Menu</title>
+    <title>The UI was created by HTML</title>
     <style>
         * {
             margin: 0;
@@ -361,6 +361,211 @@
             visibility: visible;
         }
 
+        /* Added extras modal styles */
+        /* Extras Modal */
+        .extras-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            width: 90%;
+            max-width: 500px;
+            background: #FFFFFF;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            z-index: 300;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .extras-modal.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .extras-header {
+            padding: 2rem;
+            border-bottom: 1px solid #E5E5E5;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .extras-title-section h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: #1A1A1A;
+        }
+
+        .extras-price {
+            font-size: 1.125rem;
+            color: #2D5740;
+            font-weight: 600;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+            padding: 0.5rem;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+
+        .close-modal:hover {
+            color: #1A1A1A;
+        }
+
+        .extras-body {
+            padding: 2rem;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .extras-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .extras-section-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1A1A1A;
+        }
+
+        .extra-option {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            border: 2px solid #E5E5E5;
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .extra-option:hover {
+            border-color: #2D5740;
+            background: #F9FBF9;
+        }
+
+        .extra-option input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+            cursor: pointer;
+            accent-color: #2D5740;
+        }
+
+        .extra-label {
+            flex: 1;
+            font-size: 0.95rem;
+            color: #1A1A1A;
+            cursor: pointer;
+        }
+
+        .extra-price-tag {
+            font-size: 0.875rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: #F5F5F5;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .quantity-label {
+            font-weight: 600;
+            color: #1A1A1A;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-left: auto;
+        }
+
+        .quantity-btn {
+            background: #FFFFFF;
+            border: 2px solid #E5E5E5;
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #2D5740;
+            transition: all 0.2s;
+        }
+
+        .quantity-btn:hover {
+            border-color: #2D5740;
+            background: #F9FBF9;
+        }
+
+        .quantity-display {
+            min-width: 40px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.125rem;
+        }
+
+        .extras-footer {
+            padding: 2rem;
+            border-top: 1px solid #E5E5E5;
+        }
+
+        .add-to-cart-modal {
+            width: 100%;
+            background: #2D5740;
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .add-to-cart-modal:hover {
+            background: #234430;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            z-index: 250;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        /* </CHANGE> */
+
         /* Responsive */
         @media (max-width: 768px) {
             .hero h1 {
@@ -379,13 +584,24 @@
             header {
                 padding: 1rem;
             }
+
+            .extras-modal {
+                width: 95%;
+                max-height: 95vh;
+            }
+
+            .extras-header,
+            .extras-body,
+            .extras-footer {
+                padding: 1.5rem;
+            }
         }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
 <header>
-    <div class="logo">Sakura Sushi</div>
+    <div class="logo">Nigels Sushi - UI created by AI</div>
     <button class="cart-btn" onclick="toggleCart()">
         <span>Cart</span>
         <span class="cart-count" id="cartCount">0</span>
@@ -398,19 +614,19 @@
 </div>
 
 <div class="menu-container">
-    <div class="category">
+    <div class="category">  
         <h2 class="category-title">Nigiri</h2>
-        <div class="menu-grid" id="nigiriGrid"></div>
+        <div class="menu-grid" id="rollGrid"></div>
     </div>
 
     <div class="category">
         <h2 class="category-title">Maki Rolls</h2>
-        <div class="menu-grid" id="makiGrid"></div>
+        <div class="menu-grid" id="drinkGrid"></div>
     </div>
 
     <div class="category">
         <h2 class="category-title">Special Rolls</h2>
-        <div class="menu-grid" id="specialGrid"></div>
+        <div class="menu-grid" id="appetizerGrid"></div>
     </div>
 </div>
 
@@ -435,38 +651,109 @@
     </div>
 </div>
 
+<!-- Added extras modal HTML -->
+<!-- Extras Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeExtrasModal()"></div>
+
+<div class="extras-modal" id="extrasModal">
+    <div class="extras-header">
+        <div class="extras-title-section">
+            <h3 id="modalItemName">Item Name</h3>
+            <span class="extras-price" id="modalItemPrice">$0.00</span>
+        </div>
+        <button class="close-modal" onclick="closeExtrasModal()">&times;</button>
+    </div>
+    <div class="extras-body">
+        <div class="quantity-selector">
+            <span class="quantity-label">Quantity</span>
+            <div class="quantity-controls">
+                <button class="quantity-btn" onclick="updateModalQuantity(-1)">−</button>
+                <span class="quantity-display" id="modalQuantity">1</span>
+                <button class="quantity-btn" onclick="updateModalQuantity(1)">+</button>
+            </div>
+        </div>
+
+        <div class="extras-section">
+            <h4 class="extras-section-title">Add Extras</h4>
+            <label class="extra-option">
+                <input type="checkbox" id="extraWasabi" value="wasabi">
+                <span class="extra-label">Extra Wasabi</span>
+                <span class="extra-price-tag">Free</span>
+            </label>
+            <label class="extra-option">
+                <input type="checkbox" id="extraGinger" value="ginger">
+                <span class="extra-label">Extra Ginger</span>
+                <span class="extra-price-tag">Free</span>
+            </label>
+            <label class="extra-option">
+                <input type="checkbox" id="extraSoySauce" value="soy">
+                <span class="extra-label">Extra Soy Sauce</span>
+                <span class="extra-price-tag">Free</span>
+            </label>
+            <label class="extra-option">
+                <input type="checkbox" id="spicyMayo" value="spicy-mayo">
+                <span class="extra-label">Spicy Mayo</span>
+                <span class="extra-price-tag">+$0.50</span>
+            </label>
+            <label class="extra-option">
+                <input type="checkbox" id="eelSauce" value="eel-sauce">
+                <span class="extra-label">Eel Sauce</span>
+                <span class="extra-price-tag">+$0.50</span>
+            </label>
+            <label class="extra-option">
+                <input type="checkbox" id="sriracha" value="sriracha">
+                <span class="extra-label">Sriracha</span>
+                <span class="extra-price-tag">+$0.25</span>
+            </label>
+            <label class="extra-option">
+                <input type="checkbox" id="whiteRice" value="white-rice">
+                <span class="extra-label">White-rice</span>
+                <span class="extra-price-tag">+$2.00</span>
+            </label>
+            <label class="extra-option">
+                <input type="checkbox" id="misoSoup" value="miso-soup">
+                <span class="extra-label">miso-soup</span>
+                <span class="extra-price-tag">+$2.00</span>
+            </label>
+        </div>
+    </div>
+    <div class="extras-footer">
+        <button class="add-to-cart-modal" onclick="confirmAddToCart()">
+            Add to Cart - <span id="modalTotalPrice">$0.00</span>
+        </button>
+    </div>
+</div>
+<!-- </CHANGE> -->
+
 <script>
     // Menu Data
     let menuData = {};
-
-    const settings = {
-        "async": true,
-        "crossDomain": true,
-        "url": "http://localhost:8080/api/menu",
-        "method": "GET",
-        "headers": {
-            "User-Agent": "insomnia/12.0.0"
-        }
-    };
-    $.ajax(settings).done(function (response) {
-        menuData = response;
-        Object.assign(menuData, response);
-    });
-    console.log(menuData)
-
+    fetch("http://localhost:8080/api/menu")
+        .then(res => res.json())
+        .then(data => {
+            menuData = data;
+            renderMenu();
+        })
+        .catch(err => console.error("Error fetching menu:", err));
+    
     // Cart State
     let cart = [];
+    
+    let currentModalItem = null;
+    let modalQuantity = 1;
+    // </CHANGE>
 
     // Render Menu Items
     function renderMenu() {
-        renderCategory('nigiri', 'nigiriGrid');
-        renderCategory('maki', 'makiGrid');
-        renderCategory('special', 'specialGrid');
+        renderCategory('Roll', 'rollGrid');
+        renderCategory('Drink', 'drinkGrid');
+        renderCategory("Appetizer", "appetizerGrid")
     }
 
     function renderCategory(category, gridId) {
         const grid = document.getElementById(gridId);
-        grid.innerHTML = menuData[category].map(item => `
+        const items = menuData[category] || [];
+        grid.innerHTML = items.map(item => `
             <div class="menu-item">
                 <img src="${item.image}" alt="${item.name}" class="item-image">
                 <div class="item-info">
@@ -485,38 +772,139 @@
 
     // Cart Functions
     function addToCart(itemId) {
-        const allItems = [...menuData.nigiri, ...menuData.maki, ...menuData.special];
+        const allItems = [...menuData.Appetizer, ...menuData.Drink, ...menuData.Roll];
         const item = allItems.find(i => i.id === itemId);
+        
+        if (item) {
+            currentModalItem = item;
+            modalQuantity = 1;
+            openExtrasModal(item);
+        }
+    }
 
-        const existingItem = cart.find(i => i.id === itemId);
+    function openExtrasModal(item) {
+        document.getElementById('modalItemName').textContent = item.name;
+        document.getElementById('modalItemPrice').textContent = `$${item.price.toFixed(2)}`;
+        document.getElementById('modalQuantity').textContent = modalQuantity;
+        
+        // Reset checkboxes
+        document.querySelectorAll('.extras-modal input[type="checkbox"]').forEach(cb => cb.checked = false);
+        
+        updateModalTotal();
+        
+        document.getElementById('modalOverlay').classList.add('active');
+        document.getElementById('extrasModal').classList.add('active');
+    }
+
+    function closeExtrasModal() {
+        document.getElementById('modalOverlay').classList.remove('active');
+        document.getElementById('extrasModal').classList.remove('active');
+        currentModalItem = null;
+        modalQuantity = 1;
+    }
+
+    function updateModalQuantity(delta) {
+        modalQuantity += delta;
+        if (modalQuantity < 1) modalQuantity = 1;
+        document.getElementById('modalQuantity').textContent = modalQuantity;
+        updateModalTotal();
+    }
+
+    function updateModalTotal() {
+        if (!currentModalItem) return;
+        
+        let total = currentModalItem.price;
+        
+        // Add extra costs
+        if (document.getElementById('spicyMayo').checked) total += 0.50;
+        if (document.getElementById('eelSauce').checked) total += 0.50;
+        if (document.getElementById('sriracha').checked) total += 0.25;
+        if (document.getElementById('misoSoup').checked) total += 2.00;
+        if (document.getElementById('whiteRice').checked) total += 2.00;
+
+        
+        total *= modalQuantity;
+        
+        document.getElementById('modalTotalPrice').textContent = `$${total.toFixed(2)}`;
+    }
+
+    // Add event listeners to checkboxes to update total
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.extras-modal input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', updateModalTotal);
+        });
+    });
+
+    function confirmAddToCart() {
+        if (!currentModalItem) return;
+        
+        // Get selected extras
+        const extras = [];
+        if (document.getElementById('extraWasabi').checked) extras.push('Extra Wasabi');
+        if (document.getElementById('extraGinger').checked) extras.push('Extra Ginger');
+        if (document.getElementById('extraSoySauce').checked) extras.push('Extra Soy Sauce');
+        if (document.getElementById('spicyMayo').checked) extras.push('Spicy Mayo');
+        if (document.getElementById('eelSauce').checked) extras.push('Eel Sauce');
+        if (document.getElementById('sriracha').checked) extras.push('Sriracha');
+        if (document.getElementById('whiteRice').checked) extras.push('White rice');
+        if (document.getElementById('misoSoup').checked) extras.push('Miso Soup');
+
+        
+        // Calculate price with extras
+        let itemPrice = currentModalItem.price;
+        if (document.getElementById('spicyMayo').checked) itemPrice += 0.50;
+        if (document.getElementById('eelSauce').checked) itemPrice += 0.50;
+        if (document.getElementById('sriracha').checked) itemPrice += 0.25;
+        if (document.getElementById('whiteRice').checked) itemPrice += 2.00;
+        if (document.getElementById('misoSoup').checked) itemPrice += 2.00;
+
+        
+        // Add to cart
+        const cartItem = {
+            ...currentModalItem,
+            price: itemPrice,
+            quantity: modalQuantity,
+            extras: extras
+        };
+        
+        const existingItem = cart.find(i => 
+            i.id === currentModalItem.id && 
+            JSON.stringify(i.extras) === JSON.stringify(extras)
+        );
+        
         if (existingItem) {
-            existingItem.quantity++;
+            existingItem.quantity += modalQuantity;
         } else {
-            cart.push({ ...item, quantity: 1 });
+            cart.push(cartItem);
         }
 
-        // api request
+        // API request
         const bodyData = {
-            name: item.name,
-            price: item.price,
-            isDrink: false,
+            name: currentModalItem.name,
+            price: itemPrice,
+            isDrink: currentModalItem.category == "Drink" ? true : false,
             isHot: false,
             isAppetizer: false,
-            isRaw: false
-        }
+            isRaw: false,
+            category: currentModalItem.category,
+            extras: extras
+        };
+        
         const options = {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json', 'User-Agent': navigator.userAgent},
-          body: JSON.stringify(bodyData)
+            method: 'POST',
+            headers: {'Content-Type': 'application/json', 'User-Agent': "aw"},
+            body: JSON.stringify(bodyData)
         };
 
         fetch('http://localhost:8080/api/cart/add', options)
-          .then(response => response.json())
-          .then(response => console.log(response))
-          .catch(err => console.error(err));
+            .then(response => response.json())
+            .then(response => console.log(response))
+            .catch(err => console.error(err));
 
         updateCart();
+        closeExtrasModal();
     }
+    // </CHANGE>
 
     function updateQuantity(itemId, delta) {
         const item = cart.find(i => i.id === itemId);
@@ -556,6 +944,7 @@
                     <img src="${item.image}" alt="${item.name}" class="cart-item-image">
                     <div class="cart-item-info">
                         <div class="cart-item-name">${item.name}</div>
+                        ${item.extras && item.extras.length > 0 ? `<div style="font-size: 0.8rem; color: #666; margin-top: 0.25rem;">${item.extras.join(', ')}</div>` : ''}
                         <div class="cart-item-price">$${item.price.toFixed(2)}</div>
                         <div class="cart-item-controls">
                             <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">−</button>
@@ -566,6 +955,7 @@
                     </div>
                 </div>
             `).join('');
+            // </CHANGE>
             checkoutBtn.disabled = false;
         }
     }
@@ -597,6 +987,7 @@
             cart = [];
             updateCart();
             toggleCart();
+            window.open('http://localhost:8080/receipt.html', '_blank').focus();
         } else {
             alert(`You currently have ${cart.length} items inside of your cart. Please add something to checkout.`)
         }
@@ -606,5 +997,4 @@
     renderMenu();
 </script>
 </body>
-this design was made by CHATGPT
 </html>
