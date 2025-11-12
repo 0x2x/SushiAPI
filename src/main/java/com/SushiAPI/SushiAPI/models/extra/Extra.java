@@ -1,16 +1,13 @@
 package com.SushiAPI.SushiAPI.models.extra;
 
 import com.SushiAPI.SushiAPI.models.Item;
+import com.google.gson.JsonArray;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Extra{
-    private static final List<String> VALID_CHOICES = List.of(
-        "wasabi",
-        "white rice",
-        "gluten free soysauce"
-    );
+
     private String name;
 
     public Extra( String name) {
@@ -32,10 +29,6 @@ public class Extra{
     }
 
     //
-    public static List<String> getValidChoices() {
-        return VALID_CHOICES;
-    }
-
     @Override
     public String toString() {
         return "Extra{" +

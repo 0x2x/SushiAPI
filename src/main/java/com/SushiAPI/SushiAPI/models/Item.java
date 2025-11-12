@@ -1,6 +1,8 @@
 package com.SushiAPI.SushiAPI.models;
 
 import com.SushiAPI.SushiAPI.models.extra.Extra;
+import com.google.gson.JsonArray;
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +15,8 @@ public abstract class Item {
     private boolean isAppetizer;
     private boolean isRaw;
     private int id;
-    private List<Extra> extras; // allows users to add extra spicy mayo, side of white rice, gluten-free soysauce
+//    private List<Extra> extras; // allows users to add extra spicy mayo, side of white rice, gluten-free soysauce
+    private JSONArray extras;
     // Constructor
     protected Item(String name, double price, boolean isDrink, boolean isHot, boolean isAppetizer, boolean isRaw) {
         this.name = name;
@@ -24,7 +27,7 @@ public abstract class Item {
         this.isRaw = isRaw;
     }
 
-    public Item(String name, double price, boolean isDrink, boolean isHot, boolean isAppetizer, boolean isRaw, List<Extra> extras) {
+    public Item(String name, double price, boolean isDrink, boolean isHot, boolean isAppetizer, boolean isRaw, JSONArray extras) {
         this(name, price, isDrink, isHot, isAppetizer, isRaw);
         this.extras = extras;
     }
@@ -47,11 +50,11 @@ public abstract class Item {
         this.price = price;
     }
 
-    public List<Extra> getExtras() {
+    public JSONArray getExtras() {
         return extras;
     }
 
-    public void setExtras(List<Extra> extras) {this.extras = extras;}
+    public void setExtras(JSONArray extras) {this.extras = extras;}
 
     public int getId() {
         return id;

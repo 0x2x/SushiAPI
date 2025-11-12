@@ -1,7 +1,6 @@
 package com.SushiAPI.SushiAPI.utils;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.*;
 
 public class Files {
     public static StringBuilder readFile(String path) {
@@ -24,4 +23,14 @@ public class Files {
         return stringBuilder;
     }
 
+    public static void writeFile(String path, boolean Append, StringBuilder content) {
+        try (FileWriter writer = new FileWriter(path, Append)){
+            writer.write(content.toString());
+            writer.close();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 }

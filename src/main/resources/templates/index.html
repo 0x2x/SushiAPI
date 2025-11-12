@@ -614,18 +614,18 @@
 </div>
 
 <div class="menu-container">
-    <div class="category">
-        <h2 class="category-title">Drinks</h2>
-        <div class="menu-grid" id="drinkGrid"></div>
-    </div>
-
     <div class="category">  
-        <h2 class="category-title">Rolls</h2>
+        <h2 class="category-title">Nigiri</h2>
         <div class="menu-grid" id="rollGrid"></div>
     </div>
 
     <div class="category">
-        <h2 class="category-title">Appetizers</h2>
+        <h2 class="category-title">Maki Rolls</h2>
+        <div class="menu-grid" id="drinkGrid"></div>
+    </div>
+
+    <div class="category">
+        <h2 class="category-title">Special Rolls</h2>
         <div class="menu-grid" id="appetizerGrid"></div>
     </div>
 </div>
@@ -998,8 +998,8 @@
                 total: 14.57,
                 amountPaid: 20.00
             };
-            openReceipt(data);
-            window.open('http://localhost:8080/receipt', '_blank').focus();
+            //openReceipt(data);
+            //window.open('http://localhost:8080/receipt', '_blank').focus();
         } else {
             alert(`You currently have ${cart.length} items inside of your cart. Please add something to checkout.`)
         }

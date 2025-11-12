@@ -61,7 +61,7 @@
       background: repeating-linear-gradient(90deg,
           transparent,
           transparent 10px,
-          #ddd 10px,
+          #dddddd 10px,
           #ddd 11px);
       border-radius: 0 0 3px 3px;
     }
@@ -180,9 +180,9 @@
     <div class="receipt-content">
       <div class="store-name">AI SUSHI </div>
       <div class="store-info">
-        123 Main Street<br>
-        Anytown, ST 12345<br>
-        Tel: (555) 123-4567
+        187 White Center<br>
+        Seattle, WA<br>
+        Tel: (260) 187-5365
       </div>
 
       <div class="divider"></div>
@@ -195,24 +195,25 @@
         <span id="generatedReceipt"></span>
       </div>
       <div class="receipt-row">
-        <span>Cashier: Online Website</span>
+        <span>Cashier: Online Order</span>
       </div>
 
       <div class="divider"></div>
-      <div id="receipt-items">
-      </div>
+      <div id="receipt-items" th:utext="${items}"></div>
+
+
       <div class="total-section">
         <div class="total-row">
           <span>Subtotal:</span>
-          <span>${subTotal}</span>
+          <span th:Text="${subTotal}">$0.00</span>
         </div>
         <div class="total-row">
           <span>Tax (8.5%):</span>
-          <span>$2.44</span>
+          <span th:Text="${tax}">$0.00</span>
         </div>
         <div class="total-row grand-total">
           <span>TOTAL:</span>
-          <span>$31.18</span>
+          <span th:Text="${total}">$0.00</span>
         </div>
       </div>
 
@@ -224,20 +225,19 @@
       </div>
       <div class="receipt-row">
         <span>Amount Paid:</span>
-        <span>$31.18</span>
+        <span th:Text="${amountPaid}">$0.00</span>
       </div>
 
       <div class="barcode">
         <div class="barcode-img"></div>
-        <div class="barcode-number">* 1234567890123 *</div>
+        <div class="barcode-number" id="barcode-number"></div>
       </div>
 
       <div class="thank-you">THANK YOU!</div>
 
       <div class="footer">
         Please retain this receipt for your records<br>
-        Return policy: 30 days with receipt<br>
-        www.grocerymart.com
+        Return policy: 30 days with receipt
       </div>
     </div>
   </div>
@@ -247,17 +247,13 @@
 <script>
   let DateNow = document.getElementById("date-now");
   let TimeNow = document.getElementById("time-now");
-  let receiptId = document.getElementById("generatedReceipt")
+  let receiptId = document.getElementById("generatedReceipt");
+  let barCodeNumber = document.getElementById("barcode-number")
   let generateReceiptId = Math.round(Math.random() * 9999);
+  let barCodeGeneratedNumber = Math.round(Math.random() * 9999999999999);
   let receiptItems = document.getElementById("receipt-items");
-  const urlParams = new URLSearchParams(window.location.search);
-  
-  const taxOwe =  urlParams.get('tax');
-  const subTotal =  urlParams.get('subTotal');
-  const total =  urlParams.get('total');
-  const items =  urlParams.get('items');
-  console.log(taxOwe)
 
+  barCodeNumber.innerText = `* ${barCodeGeneratedNumber} *`;
 
   const today = new Date();
   let day = today.getDate();
@@ -276,13 +272,7 @@
   receiptId.innerText = "Receipt #: " + generateReceiptId;
 
   console.log(receiptItems);
-  let itemName = "hey";
-  let itemPrice = 2;
-  let rowItem = `<div class="receipt-row">
-          <span class="item-name">${itemName}</span>
-          <span class="item-price">$${itemPrice}</span>
-        </div>`;
-  receiptItems.innerHTML = rowItem;
+  
 
 
 </script>

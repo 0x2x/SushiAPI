@@ -1,0 +1,16 @@
+time:
+date:
+=========ORDER ITEMS================
+
+
+
+
+=========SUB TOTAL==================
+Subtotal:
+tax:
+
+=========TOTAL======================
+total:
+====================================
+Payment method:
+Amount Paid:

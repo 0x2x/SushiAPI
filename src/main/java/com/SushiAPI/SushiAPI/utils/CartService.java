@@ -16,6 +16,10 @@ public class CartService {
     }
 
     public static ArrayList<Item> allItems() {
+        System.out.println(main.Cart);
+        main.Cart.forEach(item -> {
+            System.out.println(item.getExtras());
+        });
         return main.Cart;
     }
 
