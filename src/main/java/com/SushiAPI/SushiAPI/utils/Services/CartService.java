@@ -7,8 +7,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class CartService {
-    public static MenuItem addItemByName(String name) {
-        return main.items.stream().filter(product -> product.getName().toLowerCase().startsWith(name.strip())).findFirst().orElse(null); // filter though
+    public static MenuItem findItemByName(String name) {
+        return main.items.stream().filter(product -> product.getName().toLowerCase().startsWith(name.toLowerCase().strip())).findFirst().orElse(null); // filter though
     }
     public static void addItemByItem(MenuItem item) {
         main.Cart.add(item);

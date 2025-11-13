@@ -32,7 +32,7 @@ public class CartController {
     public ResponseEntity<String> addItem(@RequestBody String addItem) {
         JSONObject jsonObject = new JSONObject(addItem);
         JSONArray extras = jsonObject.getJSONArray("extras");
-        MenuItem result = CartService.addItemByName(jsonObject.getString("name"));
+        MenuItem result = CartService.findItemByName(jsonObject.getString("name").strip());
         if(result != null) {
             if(!extras.isEmpty())  {
                  List<String> extrasList = IntStream.range(0, extras.length()).mapToObj(extras::getString).toList();
@@ -53,17 +53,24 @@ public class CartController {
             main.Cart.add(result);
             return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(result.toString());
         }
-        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(result.toString());
+        return ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON).body("Can't find item");
     }
 
     @PostMapping("/api/cart/remove")
-    public boolean removeItem(@RequestBody String removeItem) {
-        return true;
+    public ResponseEntity<String> removeItem(@RequestBody String removeItem) {
+        JSONObject jsonObject = new JSONObject(removeItem);
+        MenuItem result = CartService.findItemByName(jsonObject.getString("name").strip());
+        if(result != null) {
+            main.Cart.remove(result);
+            return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(result.toString());
+        }
+        return ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON).body("Can't find item");
     }
 
 
     @PostMapping("/api/cart/delete")
     public boolean deleteAllItems() {
+        main.Cart.clear();
         return true;
     }
 

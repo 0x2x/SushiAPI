@@ -7,7 +7,6 @@ public class Traditional extends Appetizer{
     private double price;
     private List<String> ingredients;
     private List<String> extras;
-    private int id;
     public Traditional(String name, double price, int spiceLevel, List<String> ingredients, List<String> extras) {
         super(name + " Traditional Appetizer", price, spiceLevel, "Appetizer", ingredients, extras);
         this.name = name;
@@ -50,15 +49,7 @@ public class Traditional extends Appetizer{
         return false;
     }
 
-    @Override
-    public void setId(int itemId) {
-        itemId = id;
-    }
 
-    @Override
-    public int getId() {
-        return 0;
-    }
 
     @Override
     public String toString() {

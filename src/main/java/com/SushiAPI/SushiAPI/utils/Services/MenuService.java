@@ -18,6 +18,7 @@ public class MenuService {
                 menuItems.put(category, new ArrayList<>());
             }
             item.setId(index);
+            System.out.println(index);
             index++;
             menuItems.get(category).add(item);
         }

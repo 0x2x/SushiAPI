@@ -7,7 +7,7 @@ public class Seafoods extends Appetizer{
     private double price;
     private List<String> ingredients;
     private List<String> extras;
-    private int itemId;
+
     public Seafoods(String name, double price, int spiceLevel, List<String> ingredients, List<String> extras) {
         super(name + " Seafood Appetizer", price, spiceLevel, "Appetizer", ingredients, extras);
         this.name = name;
@@ -50,15 +50,7 @@ public class Seafoods extends Appetizer{
         return false;
     }
 
-    @Override
-    public void setId(int id) {
-        id = itemId;
-    }
 
-    @Override
-    public int getId() {
-        return 0;
-    }
 
     @Override
     public String toString() {

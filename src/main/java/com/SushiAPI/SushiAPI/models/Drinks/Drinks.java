@@ -1,11 +1,12 @@
 package com.SushiAPI.SushiAPI.models.Drinks;
 
 import com.SushiAPI.SushiAPI.models.MenuItem;
+import com.SushiAPI.SushiAPI.models.item;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Drinks implements MenuItem {
+public abstract class Drinks extends item implements MenuItem {
     private String name;
     private double price;
     private boolean isCold;
