@@ -1027,7 +1027,12 @@
                 toggleCart();
 
                 //TODO: fix this
-                const data = {
+               
+                }
+                });
+            
+            //openReceipt(data);
+            const data = {
                     items: [
                         { itemName: "California Roll", itemPrice: 10.99 },
                         { itemName: "Green Tea", itemPrice: 2.5 }
@@ -1037,11 +1042,9 @@
                     total: 14.57,
                     amountPaid: 20.00
                 };
-                }
-                });
-            
-            //openReceipt(data);
-            //window.open('http://localhost:8080/receipt', '_blank').focus();
+            let query = `?subTotal=${data.subTotal}&tax=${data.tax}&total=${data.total}&amountPaid=${data.amountPaid}`;
+            query += "&base64UrlEncoded=" + btoa(data.items);
+            // window.open('http://localhost:8080/receipt' + query, '_blank').focus();
         } else {
             alert(`You currently have ${cart.length} items inside of your cart. Please add something to checkout.`)
         }

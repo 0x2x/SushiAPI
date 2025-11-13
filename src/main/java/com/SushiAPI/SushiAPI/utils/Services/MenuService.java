@@ -13,12 +13,10 @@ public class MenuService {
         int index = 0;
         for(MenuItem item : main.items) {
             String category = item.getCategory();
-            System.out.println(category);
             if(!menuItems.containsKey(category)) {
                 menuItems.put(category, new ArrayList<>());
             }
             item.setId(index);
-            System.out.println(index);
             index++;
             menuItems.get(category).add(item);
         }

@@ -24,21 +24,19 @@ The User Interface (UI) for this project was developed with assistance from an *
 
 ## UML
 
-*(Insert your professional UML diagram image/link here.)*
+![UML.png](UML.png)
 
 -----
 
 ### 💻 Code Highlight: Dynamic Configuration
 
 The following code snippet demonstrates a mechanism for **dynamically adjusting frontend variables** by editing the base HTML file. This technique ensures the application's client-side presentation remains correctly configured with the server-side state.
-
 ```java
 // For example:
 // File: src/main/java/com/SushiAPI/SushiAPI/controller/Receipt/ReceiptController.java
 @GetMapping("/receipt")
-    public String showReceipt(Model model, @RequestBody String receiptData) {
+public String showReceipt(Model model, @RequestBody String receiptData) {
         JSONObject jsonObject = new JSONObject(receiptData);
-
         StringBuilder htmlBuilder = new StringBuilder();
         JSONArray jsonArray = jsonObject.getJSONArray("items");
 
