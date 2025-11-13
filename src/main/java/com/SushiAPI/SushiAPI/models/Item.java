@@ -9,6 +9,7 @@ import java.util.List;
 
 public abstract class Item {
     protected String name;
+    protected String ingredients;
     private double price;
     private boolean isDrink;
     private boolean isHot;
@@ -18,17 +19,18 @@ public abstract class Item {
 //    private List<Extra> extras; // allows users to add extra spicy mayo, side of white rice, gluten-free soysauce
     private JSONArray extras;
     // Constructor
-    protected Item(String name, double price, boolean isDrink, boolean isHot, boolean isAppetizer, boolean isRaw) {
+    protected Item(String name, double price, boolean isDrink, boolean isHot, boolean isAppetizer, boolean isRaw, String ingredients) {
         this.name = name;
         this.price = price;
         this.isDrink = isDrink;
         this.isHot = isHot;
         this.isAppetizer = isAppetizer;
         this.isRaw = isRaw;
+        this.ingredients = ingredients;
     }
 
-    public Item(String name, double price, boolean isDrink, boolean isHot, boolean isAppetizer, boolean isRaw, JSONArray extras) {
-        this(name, price, isDrink, isHot, isAppetizer, isRaw);
+    public Item(String name, double price, boolean isDrink, boolean isHot, boolean isAppetizer, boolean isRaw, String ingredients, JSONArray extras) {
+        this(name, price, isDrink, isHot, isAppetizer, isRaw, ingredients);
         this.extras = extras;
     }
 

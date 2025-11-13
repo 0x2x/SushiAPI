@@ -7,19 +7,17 @@ import org.json.JSONArray;
 import java.util.List;
 
 public class appetizers extends Item {
-    private String description;
-
-    public appetizers(String name, double price, boolean isDrink, boolean isHot, boolean isAppetizer, boolean isRaw, String description, JSONArray extras) {
-        super(name, price, isDrink, isHot, isAppetizer, isRaw, extras);
-        this.description = description;
+    public appetizers(String name, double price, boolean isDrink, boolean isHot, boolean isAppetizer, boolean isRaw, String ingredients, JSONArray extras) {
+        super(name, price, isDrink, isHot, isAppetizer, isRaw, ingredients, extras);
+        this.ingredients = ingredients;
     }
 
     public String getDescription() {
-        return description;
+        return ingredients;
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.ingredients = description;
     }
 
     @Override

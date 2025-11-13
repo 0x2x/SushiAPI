@@ -601,7 +601,7 @@
 </head>
 <body>
 <header>
-    <div class="logo">Nigels Sushi - UI created by AI</div>
+    <div class="logo">Super Sushi - UI created by AI</div>
     <button class="cart-btn" onclick="toggleCart()">
         <span>Cart</span>
         <span class="cart-count" id="cartCount">0</span>
@@ -609,23 +609,23 @@
 </header>
 
 <div class="hero">
-    <h1>Fresh Japanese Cuisine</h1>
-    <p>Experience authentic flavors with our carefully crafted sushi selection, made fresh daily with premium ingredients</p>
+    <h1>Japanese Cuisine</h1>
+    <p>Experience the best food, you've ever tasted in your life.</p>
 </div>
 
 <div class="menu-container">
     <div class="category">  
-        <h2 class="category-title">Nigiri</h2>
+        <h2 class="category-title">Rolls</h2>
         <div class="menu-grid" id="rollGrid"></div>
     </div>
 
     <div class="category">
-        <h2 class="category-title">Maki Rolls</h2>
+        <h2 class="category-title">Drinks</h2>
         <div class="menu-grid" id="drinkGrid"></div>
     </div>
 
     <div class="category">
-        <h2 class="category-title">Special Rolls</h2>
+        <h2 class="category-title">Appetizers</h2>
         <div class="menu-grid" id="appetizerGrid"></div>
     </div>
 </div>
@@ -648,6 +648,12 @@
         <button class="checkout-btn" id="checkoutBtn" disabled onclick="checkout()">
             Checkout
         </button>
+        <div class="cart-total">
+            <button class="checkout-btn" id="exitCheckOutBtn" enabled onClick="deleteCheckOut()">
+                Remove All
+            </button>
+        </div>
+        
     </div>
 </div>
 
@@ -897,8 +903,6 @@
         };
 
         fetch('http://localhost:8080/api/cart/add', options)
-            .then(response => response.json())
-            .then(response => console.log(response))
             .catch(err => console.error(err));
 
         updateCart();
@@ -923,7 +927,7 @@
         console.log(itemId.name)
         let body = {
             "name": itemId.name,
-            "price": "",
+            "price": itemId.price,
             "isDrink": false,
             "isHot": false,
             "isAppetizer": false,
@@ -1009,7 +1013,8 @@
                 cart = [];
                 updateCart();
                 toggleCart();
-            
+
+                //TODO: fix this
                 const data = {
                     items: [
                         { itemName: "California Roll", itemPrice: 10.99 },
@@ -1050,6 +1055,20 @@
 
         // Clean up
         document.body.removeChild(form);
+    }
+
+    function deleteCheckOut() {
+        cart.length = 0;
+        cart.forEach(item => {
+            removeFromCart(item.id)
+        })
+        const options = {method: 'POST', headers: {'User-Agent': 'insomnia/12.0.0'}};
+
+        fetch('http://localhost:8080/api/cart/delete', options)
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(err => console.error(err));
+        renderMenu()
     }
 
     // Initialize

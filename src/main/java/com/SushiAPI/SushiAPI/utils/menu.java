@@ -35,11 +35,12 @@ public class menu {
             String[] fields = line.split("\\|");
             String name = fields[0].trim();
             double price = Double.parseDouble(fields[1].trim());
+            String ingredients = fields[3].trim();
             boolean raw = Boolean.parseBoolean(fields[4].trim());
-            main.items.add(new Roll(name, price, false, false, false, raw, null, null));
+            main.items.add(new Roll(name, price, false, false, false, raw, ingredients, null));
         }
         // load appetizers
-        // name|price|description|hot
+        // name|price|ingredients|hot
         String resultAppetizersString = resultAppetizers.toString();
         String[] AppetizersLines = resultAppetizersString.split("\n");
         for(String line : AppetizersLines) {
@@ -47,8 +48,9 @@ public class menu {
             String[] fields = line.split("\\|");
             String name = fields[0].trim();
             double price = Double.parseDouble(fields[1].trim());
+            String ingredients = fields[2].trim();
             boolean hot = Boolean.parseBoolean(fields[3].trim());
-            main.items.add(new appetizers(name, price, false, hot, true, false, null, null));
+            main.items.add(new appetizers(name, price, false, hot, true, false, ingredients, null));
         }
     }
 }

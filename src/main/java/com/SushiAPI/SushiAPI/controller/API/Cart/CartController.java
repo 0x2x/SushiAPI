@@ -32,7 +32,6 @@ public class CartController {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(CartService.allItemsAsJson().toString());
-
     }
 
     @PostMapping("/api/cart/add")
@@ -43,13 +42,13 @@ public class CartController {
         JSONArray extras = jsonObject.getJSONArray("extras");
 
         if(jsonObject.getString("category").equalsIgnoreCase("roll")) {
-            item = new Roll(jsonObject.getString("name"), jsonObject.getDouble("price"), false, jsonObject.getBoolean("isHot"), jsonObject.getBoolean("isAppetizer"), jsonObject.getBoolean("isRaw"), null, extras);
+            item = new Roll(jsonObject.getString("name"), jsonObject.getDouble("price"), false, jsonObject.getBoolean("isHot"), jsonObject.getBoolean("isAppetizer"), jsonObject.getBoolean("isRaw"),  null, extras);
         } else if(jsonObject.getString("category").equalsIgnoreCase("drink")) {
-            item = new Drink(jsonObject.getString("name"), jsonObject.getDouble("price"), jsonObject.getBoolean("isHot"), jsonObject.getString("description"));
+            item = new Drink(jsonObject.getString("name"), jsonObject.getDouble("price"), jsonObject.getBoolean("isHot"), null);
         } else if (jsonObject.getString("category").equalsIgnoreCase("nigiri")) {
             item = new nigiri(jsonObject.getString("name"), jsonObject.getDouble("price"), false, jsonObject.getBoolean("isHot"), jsonObject.getBoolean("isAppetizer"), jsonObject.getBoolean("isRaw"), null, extras);
         } else if (jsonObject.getString("category").equalsIgnoreCase("appetizer")) {
-            item = new appetizers(jsonObject.getString("name"), jsonObject.getDouble("price"), false, jsonObject.getBoolean("isHot"), true, jsonObject.getBoolean("isRaw"), null, extras);
+            item = new appetizers(jsonObject.getString("name"), jsonObject.getDouble("price"), false, jsonObject.getBoolean("isHot"), true, jsonObject.getBoolean("isRaw") , null, extras);
         }
         CartService.addItem(item);
         return true;
@@ -71,6 +70,14 @@ public class CartController {
         CartService.removeItem(item);
         return true;
     }
+
+
+    @PostMapping("/api/cart/delete")
+    public boolean deleteAllItems() {
+        CartService.deleteAllItems();
+        return true;
+    }
+
 
     @GetMapping("/api/cart/search")
     public ResponseEntity<List<Item>> searchCart(@RequestBody String searchItem) {

@@ -10,7 +10,7 @@ public class nigiri extends Item {
     private String description;
 
     public nigiri(String name, double price, boolean isDrink, boolean isHot, boolean isAppetizer, boolean isRaw, String description, JSONArray extras) {
-        super(name, price, isDrink, isHot, isAppetizer, isRaw, extras);
+        super(name, price, isDrink, isHot, isAppetizer, isRaw, description,  extras);
         this.description = description;
     }
 

@@ -42,8 +42,7 @@ public class CartService {
         return array;
     }
 
-
-    public static double totalAmount() {
+    public static double totalAmount() { // get Total Amount
         double totalAmount = 0;
         for (int i = 0; i < main.Cart.size(); i++) {
             totalAmount += main.Cart.get(i).getPrice();
@@ -51,7 +50,7 @@ public class CartService {
         return totalAmount;
     }
 
-    public double totalAmount(double tip) {
+    public static double totalAmount(double tip) { // get total Amount Plus TIP
         double totalAmount = 0;
         for (int i = 0; i < main.Cart.size(); i++) {
             totalAmount += main.Cart.get(i).getPrice();
@@ -83,5 +82,9 @@ public class CartService {
             }
         }
         return resultList;
+    }
+
+    public static void deleteAllItems() {
+        main.Cart.clear();
     }
 }
