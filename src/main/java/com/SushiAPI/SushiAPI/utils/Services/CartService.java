@@ -43,7 +43,7 @@ public class CartService {
         main.ReceiptItems.addAll(main.Cart); // move to receipts;
         // generate receipt here
         // TODO: add generate receipt
-        // ReceiptService.SaveItems();
+        ReceiptService.saveItems();
         main.Cart.clear();
         return true;
     }
