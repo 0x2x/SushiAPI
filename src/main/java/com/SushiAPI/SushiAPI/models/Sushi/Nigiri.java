@@ -7,7 +7,7 @@ public class Nigiri extends Sushi{
     private double price;
     private List<String> ingredients;
     private List<String> extras;
-
+    private int id;
     public Nigiri(String name, double price, int spiceLevel, List<String> ingredients, List<String> extras) {
         super(name + " Nigiri", price, spiceLevel, "Nigiri", ingredients, extras);
         this.name = name;
@@ -51,6 +51,11 @@ public class Nigiri extends Sushi{
     }
 
     @Override
+    public void setId(int itemId) {
+        itemId = id;
+    }
+
+    @Override
     public String toString() {
         return "Nigiri{" +
                 "name='" + name + '\'' +
@@ -59,4 +64,6 @@ public class Nigiri extends Sushi{
                 ", extras=" + extras +
                 '}';
     }
+
+
 }

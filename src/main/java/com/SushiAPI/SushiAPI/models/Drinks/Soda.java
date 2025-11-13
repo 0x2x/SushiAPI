@@ -7,7 +7,7 @@ public class Soda extends Drinks{
     private double price;
     private List<String> ingredients;
     private List<String> extras;
-
+    private int id;
     public Soda(String name, double price, boolean isCold, boolean isAlcohol, List<String> ingredients, List<String> extras) {
         super(name + " Soda", price, isCold, false, "Soda", ingredients, extras);
         this.name = name;
@@ -53,6 +53,16 @@ public class Soda extends Drinks{
     @Override
     public boolean isAlcohol() {
         return false;
+    }
+
+    @Override
+    public void setId(int itemId) {
+        itemId = id;
+    }
+
+    @Override
+    public int getId() {
+        return 0;
     }
 
     @Override

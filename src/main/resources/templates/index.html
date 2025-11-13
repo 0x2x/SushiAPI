@@ -618,15 +618,26 @@
         <h2 class="category-title">Rolls</h2>
         <div class="menu-grid" id="rollGrid"></div>
     </div>
-
+    <div class="category">  
+        <h2 class="category-title">Nigiri</h2>
+        <div class="menu-grid" id="nigiriGrid"></div>
+    </div>
     <div class="category">
-        <h2 class="category-title">Drinks</h2>
+        <h2 class="category-title">Drinks - Non-Alcohol</h2>
         <div class="menu-grid" id="drinkGrid"></div>
+    </div>
+    <div class="category">
+        <h2 class="category-title">Drinks - Alcohol</h2>
+        <div class="menu-grid" id="AlcoholDrinkGrid"></div>
     </div>
 
     <div class="category">
-        <h2 class="category-title">Appetizers</h2>
-        <div class="menu-grid" id="appetizerGrid"></div>
+        <h2 class="category-title">Appetizers - Non-Traditional</h2>
+        <div class="menu-grid" id="SeafoodAppetizerGrid"></div>
+    </div>
+    <div class="category">
+        <h2 class="category-title">Appetizers - Traditional</h2>
+        <div class="menu-grid" id="TraditionalAppetizerGrid"></div>
     </div>
 </div>
 
@@ -751,14 +762,22 @@
 
     // Render Menu Items
     function renderMenu() {
-        renderCategory('Roll', 'rollGrid');
-        renderCategory('Drink', 'drinkGrid');
-        renderCategory("Appetizer", "appetizerGrid")
+
+        renderCategory('roll', 'rollGrid');
+        renderCategory('Soda', 'drinkGrid');
+        renderCategory('Nigiri', 'nigiriGrid');
+        renderCategory('Traditional Appetizer', 'TraditionalAppetizerGrid');
+        renderCategory('Seafood Appetizer', 'SeafoodAppetizerGrid');
+        renderCategory('Alcohol', 'AlcoholDrinkGrid');
+
+        
+        // renderCategory("Appetizer", "appetizerGrid")
     }
 
     function renderCategory(category, gridId) {
         const grid = document.getElementById(gridId);
-        const items = menuData[category] || [];
+        const items = menuData[category.trim()] || [];
+
         grid.innerHTML = items.map(item => `
             <div class="menu-item">
                 <img src="${item.image}" alt="${item.name}" class="item-image">

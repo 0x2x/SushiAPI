@@ -7,7 +7,7 @@ public class Roll extends Sushi{
     private double price;
     private List<String> ingredients;
     private List<String> extras;
-
+    private int id;
     public Roll(String name, double price, int spiceLevel, List<String> ingredients, List<String> extras) {
         super(name + " roll", price, spiceLevel, "roll", ingredients, extras);
         this.name = name;
@@ -41,6 +41,11 @@ public class Roll extends Sushi{
     }
 
     @Override
+    public void setId(int itemId) {
+        itemId = id;
+    }
+
+    @Override
     public String toString() {
         return "Roll{" +
                 "name='" + name + '\'' +
@@ -49,4 +54,6 @@ public class Roll extends Sushi{
                 ", extras=" + extras +
                 '}';
     }
+
+
 }

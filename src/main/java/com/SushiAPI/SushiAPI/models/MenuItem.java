@@ -15,5 +15,6 @@ public interface MenuItem {
     boolean isDrink();
     boolean getCold();
     boolean isAlcohol();
-
+    void setId(int id);
+    int getId();
 }

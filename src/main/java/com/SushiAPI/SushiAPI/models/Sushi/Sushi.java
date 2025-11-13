@@ -12,6 +12,7 @@ public abstract class Sushi implements MenuItem {
     private List<String> ingredients = new ArrayList<>();
     private List<String> extras = new ArrayList<>();
     private String category;
+    private int id;
 
     public Sushi(String name, double price, int spiceLevel, String category, List<String> ingredients,  List<String> extras) {
         this.name = name;
@@ -39,5 +40,14 @@ public abstract class Sushi implements MenuItem {
                 ", extras=" + extras +
                 ", category='" + category + '\'' +
                 '}';
+    }
+
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    public void setId() {
+        this.id = id;
     }
 }
