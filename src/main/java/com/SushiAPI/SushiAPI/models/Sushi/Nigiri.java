@@ -37,7 +37,7 @@ public class Nigiri extends Sushi{
 
     @Override
     public String getCategory() {
-        return "roll";
+        return "Nigiri";
     }
 
     @Override
@@ -48,5 +48,15 @@ public class Nigiri extends Sushi{
     @Override
     public boolean isAlcohol() {
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "Nigiri{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", ingredients=" + ingredients +
+                ", extras=" + extras +
+                '}';
     }
 }

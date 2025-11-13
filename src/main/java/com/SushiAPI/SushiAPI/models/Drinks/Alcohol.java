@@ -54,4 +54,14 @@ public class Alcohol extends Drinks{
     public boolean isAlcohol() {
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "Alcohol{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", ingredients=" + ingredients +
+                ", extras=" + extras +
+                '}';
+    }
 }

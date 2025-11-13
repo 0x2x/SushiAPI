@@ -54,4 +54,14 @@ public class Soda extends Drinks{
     public boolean isAlcohol() {
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "Soda{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", ingredients=" + ingredients +
+                ", extras=" + extras +
+                '}';
+    }
 }

@@ -49,4 +49,14 @@ public class Traditional extends Appetizer{
     public boolean isAlcohol() {
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "Traditional{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", ingredients=" + ingredients +
+                ", extras=" + extras +
+                '}';
+    }
 }

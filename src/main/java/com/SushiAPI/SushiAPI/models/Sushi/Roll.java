@@ -40,5 +40,13 @@ public class Roll extends Sushi{
         return false;
     }
 
-
+    @Override
+    public String toString() {
+        return "Roll{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", ingredients=" + ingredients +
+                ", extras=" + extras +
+                '}';
+    }
 }

@@ -49,4 +49,14 @@ public class Seafoods extends Appetizer{
     public boolean isAlcohol() {
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "Seafoods{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", ingredients=" + ingredients +
+                ", extras=" + extras +
+                '}';
+    }
 }

@@ -29,4 +29,15 @@ public abstract class Sushi implements MenuItem {
     @Override public List<String> getExtras() { return this.extras; }
     @Override public boolean isDrink() {return false;}
 
+    @Override
+    public String toString() {
+        return "Sushi{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", spiceLevel=" + spiceLevel +
+                ", ingredients=" + ingredients +
+                ", extras=" + extras +
+                ", category='" + category + '\'' +
+                '}';
+    }
 }

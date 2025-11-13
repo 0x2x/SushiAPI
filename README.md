@@ -63,3 +63,9 @@ The following code snippet demonstrates a mechanism for **dynamically adjusting 
 -----
 ## 🌐 FrontEnd Images: Home page
 ![img_1.png](img_1.png)
+
+
+-----
+## 🧭 API ROUTES
+This image demostrates finding an item based on name
+![img_2.png](img_2.png)

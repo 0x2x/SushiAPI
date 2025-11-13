@@ -34,4 +34,17 @@ public abstract class Drinks implements MenuItem {
     public boolean isAlcohol() {
         return isAlcohol;
     }
+
+    @Override
+    public String toString() {
+        return "Drinks{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", isCold=" + isCold +
+                ", ingredients=" + ingredients +
+                ", extras=" + extras +
+                ", category='" + category + '\'' +
+                ", isAlcohol=" + isAlcohol +
+                '}';
+    }
 }
