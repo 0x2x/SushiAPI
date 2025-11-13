@@ -61,4 +61,5 @@ The following code snippet demonstrates a mechanism for **dynamically adjusting 
 ```
 
 -----
-
+## 🌐 FrontEnd Images: Home page
+![img_1.png](img_1.png)

@@ -1,24 +1,14 @@
-package com.SushiAPI.SushiAPI.utils;
+package com.SushiAPI.SushiAPI.utils.Services;
 
 import com.SushiAPI.SushiAPI.main;
-import com.SushiAPI.SushiAPI.models.Item;
+import com.SushiAPI.SushiAPI.utils.Files;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class ReceiptService {
-    public static ArrayList<HashMap<String, Item>> generateReceipt() {
-        ArrayList<HashMap<String, Item>> items = new ArrayList<>();
-        main.ReceiptItems.forEach(item -> {
-            HashMap<String, Item> itemHashMap = new HashMap<>();
-            itemHashMap.put("testing", item);
-            items.add(itemHashMap);
-        });
-        return items;
-    }
+
 
     public static void saveItems() {
         Date now = new Date();
@@ -36,8 +26,8 @@ public class ReceiptService {
         stringBuilder.append("Time: ").append(time).append("\n");
         stringBuilder.append("=========ORDER ITEMS================").append("\n");
         main.ReceiptItems.forEach(item -> {
-            stringBuilder.append(item.getName()).append("\t\t\t\t$").append(item.getPrice()).append("\n");
-            Subtotal.updateAndGet(v -> new Double((double) (v + item.getPrice())));
+//            stringBuilder.append(item.getName()).append("\t\t\t\t$").append(item.getPrice()).append("\n");
+//            Subtotal.updateAndGet(v -> new Double((double) (v + item.getPrice())));
         });
 
         double originalNumber = Subtotal.get();

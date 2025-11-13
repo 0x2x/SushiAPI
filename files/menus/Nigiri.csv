@@ -1,0 +1,11 @@
+name|price|SpiceLevel|ingredients|raw|extra
+Salmon Nigiri|4.50|1|Salmon, Sushi Rice, Wasabi|TRUE|Soy Sauce
+Tuna Nigiri|4.75|1|Tuna, Sushi Rice, Wasabi|TRUE|Soy Sauce
+Eel Nigiri|5.00|2|Grilled Eel, Sushi Rice, Sweet Soy Sauce|FALSE|Eel Sauce
+Shrimp Nigiri|4.25|1|Boiled Shrimp, Sushi Rice, Wasabi|FALSE|Lemon Slice
+Octopus Nigiri|4.00|1|Octopus, Sushi Rice, Wasabi|FALSE|Ponzu Sauce
+Yellowtail Nigiri|4.75|2|Yellowtail, Sushi Rice, Wasabi|TRUE|Scallions
+Scallop Nigiri|5.25|1|Scallop, Sushi Rice, Wasabi|TRUE|Yuzu Sauce
+Tamago Nigiri|3.50|0|Sweet Egg Omelet, Sushi Rice, Nori|FALSE|Sesame Seeds
+Ikura Nigiri|5.50|1|Salmon Roe, Sushi Rice, Nori|TRUE|Cucumber Slice
+Uni Nigiri|6.00|1|Sea Urchin, Sushi Rice, Wasabi|TRUE|Shiso Leaf
