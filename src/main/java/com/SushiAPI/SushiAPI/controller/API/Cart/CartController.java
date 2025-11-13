@@ -8,11 +8,13 @@ import com.SushiAPI.SushiAPI.models.nigiri.nigiri;
 import com.SushiAPI.SushiAPI.models.rolls.Roll;
 import com.SushiAPI.SushiAPI.utils.CartService;
 import com.SushiAPI.SushiAPI.utils.MenuServices;
+import com.SushiAPI.SushiAPI.utils.utils;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,9 +28,11 @@ import java.util.List;
 @RestController
 public class CartController {
     @GetMapping("/api/cart")
-    public ResponseEntity<List<Item>> getMenu() {
-        List<Item> items = CartService.allItems();
-        return new ResponseEntity<List<Item>>(items, HttpStatus.OK);
+    public ResponseEntity<String> getMenu() {
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(CartService.allItemsAsJson().toString());
+
     }
 
     @PostMapping("/api/cart/add")
@@ -62,7 +66,6 @@ public class CartController {
             item =  new Drink(jsonObject.getString("name"), jsonObject.getDouble("price"), jsonObject.getBoolean("isHot"), jsonObject.getString("description"));
         } else if (jsonObject.getString("category").equalsIgnoreCase("nigiri")) {
             JSONArray myExtras = new JSONArray();
-
             item = new nigiri(jsonObject.getString("name"), jsonObject.getDouble("price"), false, jsonObject.getBoolean("isHot"), jsonObject.getBoolean("isAppetizer"), jsonObject.getBoolean("isRaw"), "Eel + avocado", myExtras);
         }
         CartService.removeItem(item);

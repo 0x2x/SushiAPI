@@ -41,7 +41,6 @@ public class ReceiptScreen {
         model.addAttribute("total", jsonObject.getDouble("total"));
         model.addAttribute("amountPaid", jsonObject.getDouble("amountPaid"));
         model.addAttribute("items", htmlBuilder.toString());
-
         return "receipt";
     }
 

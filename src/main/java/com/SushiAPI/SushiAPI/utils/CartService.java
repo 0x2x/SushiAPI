@@ -2,6 +2,10 @@ package com.SushiAPI.SushiAPI.utils;
 
 import com.SushiAPI.SushiAPI.main;
 import com.SushiAPI.SushiAPI.models.Item;
+import com.SushiAPI.SushiAPI.models.extra.Extra;
+import com.SushiAPI.SushiAPI.models.rolls.Roll;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -15,13 +19,29 @@ public class CartService {
         main.Cart.remove(item);
     }
 
-    public static ArrayList<Item> allItems() {
-        System.out.println(main.Cart);
-        main.Cart.forEach(item -> {
-            System.out.println(item.getExtras());
-        });
-        return main.Cart;
+    public static JSONArray allItemsAsJson() {
+        JSONArray array = new JSONArray();
+
+        for (Item item : main.Cart) {
+            JSONObject obj = new JSONObject();
+            obj.put("name", item.getName());
+            obj.put("price", item.getPrice());
+
+            // Convert List<String> extras to JSONArray
+            JSONArray extrasArray = new JSONArray();
+            if (item.getExtras() != null) {
+                for (Object extra : item.getExtras()) {
+                    extrasArray.put(extra);
+                }
+            }
+            obj.put("extras", extrasArray);
+
+            array.put(obj);
+        }
+
+        return array;
     }
+
 
     public static double totalAmount() {
         double totalAmount = 0;
@@ -40,6 +60,15 @@ public class CartService {
     }
 
     public static boolean pay() {
+        boolean anyFoodItems = false;
+        for (int i = 0; i < main.Cart.size(); i++) {
+            if(main.Cart.get(i).getCategory().toLowerCase() != "drink" || main.Cart.get(i).getCategory().toLowerCase() != "appetizer") { // if not a drink or appetizer
+                anyFoodItems = true;
+            }
+        }
+
+        if(!anyFoodItems) return false; // no food items
+
         main.ReceiptItems.addAll(main.Cart); // add to paid items
         ReceiptService.saveItems();
         main.Cart.clear(); // remove everything from cart
