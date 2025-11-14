@@ -1,4 +1,5 @@
-name|price|description|hot
-Edamame|3.95|steamed Japanese soy bean W/ salt|false
-Harumaki (4pcs)|3.95|Deep-fried japanese spring rolls|true
-Gyoza (6pcs)|3.95|Pan fried Japanese dumpling|true
+name|price|ingredients|hot|type
+Edamame|3.95|steamed Japanese soy bean W/ salt|false|0
+Harumaki (4pcs)|3.95|Deep-fried japanese spring rolls|true|0
+Gyoza (6pcs)|3.95|Pan fried Japanese dumpling|true|0
+Sunomono|10|Vinegary salad, octopus or shimp|false|1

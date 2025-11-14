@@ -1,24 +1,19 @@
-package com.SushiAPI.SushiAPI.utils;
+package com.SushiAPI.SushiAPI.utils.Services;
 
 import com.SushiAPI.SushiAPI.main;
-import com.SushiAPI.SushiAPI.models.Item;
+import com.SushiAPI.SushiAPI.models.Appetizer.Seafoods;
+import com.SushiAPI.SushiAPI.models.Appetizer.Traditional;
+import com.SushiAPI.SushiAPI.models.Drinks.Alcohol;
+import com.SushiAPI.SushiAPI.models.Drinks.Soda;
+import com.SushiAPI.SushiAPI.models.Sushi.Nigiri;
+import com.SushiAPI.SushiAPI.models.Sushi.Roll;
+import com.SushiAPI.SushiAPI.utils.Files;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class ReceiptService {
-    public static ArrayList<HashMap<String, Item>> generateReceipt() {
-        ArrayList<HashMap<String, Item>> items = new ArrayList<>();
-        main.ReceiptItems.forEach(item -> {
-            HashMap<String, Item> itemHashMap = new HashMap<>();
-            itemHashMap.put("testing", item);
-            items.add(itemHashMap);
-        });
-        return items;
-    }
 
     public static void saveItems() {
         Date now = new Date();
@@ -37,9 +32,9 @@ public class ReceiptService {
         stringBuilder.append("=========ORDER ITEMS================").append("\n");
         main.ReceiptItems.forEach(item -> {
             stringBuilder.append(item.getName()).append("\t\t\t\t$").append(item.getPrice()).append("\n");
+            stringBuilder.append("\t=>").append(String.join(", ", item.getExtras())).append("\t " ).append("\n");
             Subtotal.updateAndGet(v -> new Double((double) (v + item.getPrice())));
         });
-
         double originalNumber = Subtotal.get();
         double amountToAdd = originalNumber * tax;
         double Paid = originalNumber + amountToAdd;
@@ -47,15 +42,29 @@ public class ReceiptService {
         stringBuilder.append("Subtotal: $").append(Subtotal.get()).append("\n");
         stringBuilder.append("tax: $").append(amountToAdd).append("\n");
         stringBuilder.append("==========TOTAL====================").append("\n");
-        stringBuilder.append("total: $").append(Paid).append("\n");
+        stringBuilder.append("total: $").append(String.format("%.2f", Paid)).append("\n");
         stringBuilder.append("============================").append("\n");
         stringBuilder.append("Payment Method: ").append(paymentMethod).append("\n");
-        stringBuilder.append("Paid: $").append(Paid).append("\n");
-
+        stringBuilder.append("Paid: $").append(String.format("%.2f", Paid)).append("\n");
+        stringBuilder.append("--------------UNFORMATTED-------------------------").append("\n");
         main.ReceiptItems.forEach(item -> {
-            System.out.println(item);
+            if(item instanceof Soda) {
+                stringBuilder.append("Soda: ").append(item.getName()).append(" - $").append(item.getPrice()).append("\n");
+            } else if(item instanceof Alcohol) {
+                stringBuilder.append("Alcohol: ").append(item.getName()).append(" - $").append(item.getPrice()).append("\n");
+            } else if(item instanceof Traditional) {
+                stringBuilder.append("Appetizer Traditional: ").append(item.getName()).append(" - $").append(item.getPrice()).append("\n");
+            } else if(item instanceof Seafoods) {
+                stringBuilder.append("Sea Food Appetizer: ").append(item.getName()).append(" - $").append(item.getPrice()).append("\n");
+            } else if(item instanceof Nigiri) {
+                stringBuilder.append("Nigiri: ").append(item.getName()).append(" - $").append(item.getPrice()).append("\n");
+            } else if(item instanceof Roll) {
+                stringBuilder.append("Roll : ").append(item.getName()).append(" - $").append(item.getPrice()).append("\n");
+            }
         });
-
+        stringBuilder.append("Subtotal: $").append(Subtotal.get()).append("\n");
+        stringBuilder.append("tax: $").append(amountToAdd).append("\n");
+        stringBuilder.append("total: $").append(Paid).append("\n");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd-hhmmss");
 
         String formattedDate = sdf.format(now);

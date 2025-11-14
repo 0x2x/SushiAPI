@@ -1,23 +1,12 @@
 package com.SushiAPI.SushiAPI.controller.screens.Receipt;
 
 
-import com.SushiAPI.SushiAPI.main;
-import com.SushiAPI.SushiAPI.models.Item;
-import com.SushiAPI.SushiAPI.models.appetizers.appetizers;
-import com.SushiAPI.SushiAPI.models.drinks.Drink;
-import com.SushiAPI.SushiAPI.models.extra.Extra;
-import com.SushiAPI.SushiAPI.models.nigiri.nigiri;
-import com.SushiAPI.SushiAPI.models.rolls.Roll;
-import com.google.gson.JsonArray;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
-import java.util.List;
 
 @Controller
 public class ReceiptScreen {

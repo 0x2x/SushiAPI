@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
-
 public class mainScreen {
     @GetMapping("/")
     public String ShowIndex(Model model) {

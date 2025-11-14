@@ -31,6 +31,15 @@ public class Files {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
 
+    public static void writeFile(String path, boolean Append, String content) {
+        try (FileWriter writer = new FileWriter(path, Append)){
+            writer.write(content);
+            writer.close();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

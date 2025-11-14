@@ -1,6 +1,6 @@
 ## 🍣 Super Sushi: A Spring Boot REST API Project 🚀
 
-This project, **Super Sushi**, is a **Spring Boot** application written in **Java** that demonstrates the development of a **REST API**. Beyond the core application functionality, it serves as a practical example of **version control best practices**, showcasing a clear history of committed features, bug fixes, and subsequent refactoring.
+This project, **Super Sushi**, is a **Spring Boot** application written in **Java** that demonstrates the development of a **REST API** and using **OOP**. Beyond the core application functionality, it serves as a practical example of **version control best practices**, showcasing a clear history of committed features, bug fixes, and subsequent refactoring.
 
 -----
 
@@ -9,7 +9,7 @@ This project, **Super Sushi**, is a **Spring Boot** application written in **Jav
 * **RESTful API Implementation:** Super Sushi establishes a functional REST API, with its specific endpoints and structure detailed within the project's subfolders.
 * **Version Control Demonstration:** The project's commit history is an intentional artifact, illustrating the cyclical process of **committing features, encountering/fixing bugs, and re-fixing/refactoring** the codebase for improved stability and clarity.
 * **Web Application Foundation:** The choice of a web application provides a tangible platform for interacting with the developed API.
-
+* **OOP:** Using polymorphisms, interfaces, abstract and extending keywords.
 -----
 
 ### 🎨 User Interface Development Disclaimer
@@ -24,21 +24,19 @@ The User Interface (UI) for this project was developed with assistance from an *
 
 ## UML
 
-*(Insert your professional UML diagram image/link here.)*
+![UML.png](UML.png)
 
 -----
 
 ### 💻 Code Highlight: Dynamic Configuration
 
 The following code snippet demonstrates a mechanism for **dynamically adjusting frontend variables** by editing the base HTML file. This technique ensures the application's client-side presentation remains correctly configured with the server-side state.
-
 ```java
 // For example:
 // File: src/main/java/com/SushiAPI/SushiAPI/controller/Receipt/ReceiptController.java
 @GetMapping("/receipt")
-    public String showReceipt(Model model, @RequestBody String receiptData) {
+public String showReceipt(Model model, @RequestBody String receiptData) {
         JSONObject jsonObject = new JSONObject(receiptData);
-
         StringBuilder htmlBuilder = new StringBuilder();
         JSONArray jsonArray = jsonObject.getJSONArray("items");
 
@@ -61,4 +59,10 @@ The following code snippet demonstrates a mechanism for **dynamically adjusting 
 ```
 
 -----
+## 🌐 FrontEnd Images: Home page
+![img_3.png](img_3.png)
 
+-----
+## 🧭 API ROUTES
+This image demostrates finding an item based on name
+![img_2.png](img_2.png)

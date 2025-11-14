@@ -13,7 +13,6 @@ public class utils {
         for (int i = 0; i < array.length(); i++) {
             list.add(array.get(i));
         }
-
         return list;
     }
     public static List<String> ArrayToStringList(JSONArray array) {
@@ -21,7 +20,6 @@ public class utils {
         for (int i = 0; i < array.length(); i++) {
             list.add(array.getString(i));
         }
-
         return list;
     }
 

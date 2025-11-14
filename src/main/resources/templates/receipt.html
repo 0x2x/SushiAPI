@@ -252,6 +252,15 @@
   let generateReceiptId = Math.round(Math.random() * 9999);
   let barCodeGeneratedNumber = Math.round(Math.random() * 9999999999999);
   let receiptItems = document.getElementById("receipt-items");
+  const urlParams = new URLSearchParams(window.location.search);
+  console.log(urlParams)
+  
+  // PARAMS
+  const itemB64 = atob(urlParams.get("base64UrlEncoded"));
+  console.log(JSON.stringify(itemB64));
+
+  //
+
 
   barCodeNumber.innerText = `* ${barCodeGeneratedNumber} *`;
 
