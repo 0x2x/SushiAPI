@@ -38,6 +38,30 @@
             color: #1A1A1A;
         }
 
+        /* Added header actions wrapper for multiple buttons */
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .add-item-btn {
+            background: #C85A54;
+            color: #FFFFFF;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .add-item-btn:hover {
+            background: #B44A44;
+        }
+        /* </CHANGE> */
+
         .cart-btn {
             position: relative;
             background: #2D5740;
@@ -361,7 +385,6 @@
             visibility: visible;
         }
 
-        /* Added extras modal styles */
         /* Extras Modal */
         .extras-modal {
             position: fixed;
@@ -564,6 +587,118 @@
             opacity: 1;
             visibility: visible;
         }
+
+        /* Add Item Modal Styles */
+        .add-item-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            width: 90%;
+            max-width: 550px;
+            background: #FFFFFF;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            z-index: 300;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .add-item-modal.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1A1A1A;
+            font-size: 0.95rem;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #E5E5E5;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: #2D5740;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            background: #F5F5F5;
+            border-radius: 8px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: #2D5740;
+        }
+
+        .checkbox-group label {
+            cursor: pointer;
+            font-size: 0.95rem;
+            color: #1A1A1A;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: #C85A54;
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .submit-btn:hover {
+            background: #B44A44;
+        }
+
+        .submit-btn:disabled {
+            background: #CCC;
+            cursor: not-allowed;
+        }
         /* </CHANGE> */
 
         /* Responsive */
@@ -595,6 +730,27 @@
             .extras-footer {
                 padding: 1.5rem;
             }
+
+            /* Responsive styles for add item modal */
+            .add-item-modal {
+                width: 95%;
+                max-height: 95vh;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .header-actions {
+                gap: 0.5rem;
+            }
+
+            .add-item-btn,
+            .cart-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
+            /* </CHANGE> */
         }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -602,10 +758,17 @@
 <body>
 <header>
     <div class="logo">Super Sushi - UI created by AI</div>
-    <button class="cart-btn" onclick="toggleCart()">
-        <span>Cart</span>
-        <span class="cart-count" id="cartCount">0</span>
-    </button>
+    <!-- Added header actions wrapper with Add Item button -->
+    <div class="header-actions">
+        <button class="add-item-btn" onclick="openAddItemModal()">
+            + Add Item
+        </button>
+        <button class="cart-btn" onclick="toggleCart()">
+            <span>Cart</span>
+            <span class="cart-count" id="cartCount">0</span>
+        </button>
+    </div>
+    <!-- </CHANGE> -->
 </header>
 
 <div class="hero">
@@ -614,11 +777,11 @@
 </div>
 
 <div class="menu-container">
-    <div class="category">  
+    <div class="category">
         <h2 class="category-title">Rolls</h2>
         <div class="menu-grid" id="rollGrid"></div>
     </div>
-    <div class="category">  
+    <div class="category">
         <h2 class="category-title">Nigiri</h2>
         <div class="menu-grid" id="nigiriGrid"></div>
     </div>
@@ -659,12 +822,9 @@
         <button class="checkout-btn" id="checkoutBtn" disabled onclick="checkout()">
             Checkout
         </button>
-       
-        
     </div>
 </div>
 
-<!-- Added extras modal HTML -->
 <!-- Extras Modal -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeExtrasModal()"></div>
 
@@ -736,6 +896,73 @@
         </button>
     </div>
 </div>
+
+<!-- Add Item Modal for custom menu item creation -->
+<div class="modal-overlay" id="addItemOverlay" onclick="closeAddItemModal()"></div>
+
+<div class="add-item-modal" id="addItemModal">
+    <div class="extras-header">
+        <div class="extras-title-section">
+            <h3>Add Custom Menu Item</h3>
+        </div>
+        <button class="close-modal" onclick="closeAddItemModal()">&times;</button>
+    </div>
+    <div class="extras-body">
+        <form id="addItemForm">
+            <div class="form-group">
+                <label class="form-label" for="itemName">Item Name *</label>
+                <input type="text" id="itemName" class="form-input" placeholder="e.g., Dragon Roll" required>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label" for="itemCategory">Category *</label>
+                    <select id="itemCategory" class="form-select" required>
+                        <option value="">Select category</option>
+                        <option value="roll">Roll</option>
+                        <option value="Nigiri">Nigiri</option>
+                        <option value="Soda">Soda (Non-Alcohol)</option>
+                        <option value="Alcohol">Alcohol</option>
+                        <option value="Traditional Appetizer">Traditional Appetizer</option>
+                        <option value="Seafood Appetizer">Seafood Appetizer</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="itemPrice">Price ($) *</label>
+                    <input type="number" id="itemPrice" class="form-input" placeholder="0.00" step="0.01" min="0" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="itemIngredients">Ingredients</label>
+                <textarea id="itemIngredients" class="form-textarea" placeholder="e.g., Salmon, avocado, cucumber..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="itemSpiceLevel">Spice Level (0-5)</label>
+                <input type="number" id="itemSpiceLevel" class="form-input" placeholder="0" min="0" max="5" value="0">
+            </div>
+
+            <div class="form-row">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="itemIsAlcohol">
+                    <label for="itemIsAlcohol">Contains Alcohol</label>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="itemIsCold" checked>
+                    <label for="itemIsCold">Served Cold</label>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="extras-footer">
+        <button class="submit-btn" onclick="submitNewItem()">
+            Add to Menu
+        </button>
+    </div>
+</div>
 <!-- </CHANGE> -->
 
 <script>
@@ -748,26 +975,21 @@
             renderMenu();
         })
         .catch(err => console.error("Error fetching menu:", err));
-    
+
     // Cart State
     let cart = [];
-    
+
     let currentModalItem = null;
     let modalQuantity = 1;
-    // </CHANGE>
 
     // Render Menu Items
     function renderMenu() {
-
         renderCategory('roll', 'rollGrid');
         renderCategory('Soda', 'drinkGrid');
         renderCategory('Nigiri', 'nigiriGrid');
         renderCategory('Traditional Appetizer', 'TraditionalAppetizerGrid');
         renderCategory('Seafood Appetizer', 'SeafoodAppetizerGrid');
         renderCategory('Alcohol', 'AlcoholDrinkGrid');
-
-        
-        // renderCategory("Appetizer", "appetizerGrid")
     }
 
     function renderCategory(category, gridId) {
@@ -795,7 +1017,7 @@
     function addToCart(itemId) {
         const allItems = [...menuData.Nigiri, ...menuData.roll, ...menuData.Alcohol, ...menuData["Traditional Appetizer"], ...menuData["Seafood Appetizer"], ...menuData["Soda"]];
         const item = allItems.find(i => i.id === itemId);
-        
+
         if (item) {
             currentModalItem = item;
             modalQuantity = 1;
@@ -807,12 +1029,12 @@
         document.getElementById('modalItemName').textContent = item.name;
         document.getElementById('modalItemPrice').textContent = `$${item.price.toFixed(2)}`;
         document.getElementById('modalQuantity').textContent = modalQuantity;
-        
+
         // Reset checkboxes
         document.querySelectorAll('.extras-modal input[type="checkbox"]').forEach(cb => cb.checked = false);
-        
+
         updateModalTotal();
-        
+
         document.getElementById('modalOverlay').classList.add('active');
         document.getElementById('extrasModal').classList.add('active');
     }
@@ -833,9 +1055,9 @@
 
     function updateModalTotal() {
         if (!currentModalItem) return;
-        
+
         let total = currentModalItem.price;
-        
+
         // Add extra costs
         if (document.getElementById('spicyMayo').checked) total += 0.50;
         if (document.getElementById('eelSauce').checked) total += 0.50;
@@ -843,9 +1065,9 @@
         if (document.getElementById('misoSoup').checked) total += 2.00;
         if (document.getElementById('whiteRice').checked) total += 2.00;
 
-        
+
         total *= modalQuantity;
-        
+
         document.getElementById('modalTotalPrice').textContent = `$${total.toFixed(2)}`;
     }
 
@@ -858,7 +1080,7 @@
 
     function confirmAddToCart() {
         if (!currentModalItem) return;
-        
+
         // Get selected extras
         const extras = [];
         if (document.getElementById('extraWasabi').checked) extras.push('Extra Wasabi');
@@ -870,7 +1092,7 @@
         if (document.getElementById('whiteRice').checked) extras.push('White rice');
         if (document.getElementById('misoSoup').checked) extras.push('Miso Soup');
 
-        
+
         // Calculate price with extras
         let itemPrice = currentModalItem.price;
         if (document.getElementById('spicyMayo').checked) itemPrice += 0.50;
@@ -879,7 +1101,7 @@
         if (document.getElementById('whiteRice').checked) itemPrice += 2.00;
         if (document.getElementById('misoSoup').checked) itemPrice += 2.00;
 
-        
+
         // Add to cart
         const cartItem = {
             ...currentModalItem,
@@ -887,12 +1109,12 @@
             quantity: modalQuantity,
             extras: extras
         };
-        
-        const existingItem = cart.find(i => 
-            i.id === currentModalItem.id && 
+
+        const existingItem = cart.find(i =>
+            i.id === currentModalItem.id &&
             JSON.stringify(i.extras) === JSON.stringify(extras)
         );
-        
+
         if (existingItem) {
             existingItem.quantity += modalQuantity;
         } else {
@@ -910,7 +1132,7 @@
             category: currentModalItem.category,
             extras: extras || []
         };
-        
+
         const options = {
             method: 'POST',
             headers: {'Content-Type': 'application/json', 'User-Agent': "aw"},
@@ -923,7 +1145,6 @@
         updateCart();
         closeExtrasModal();
     }
-    // </CHANGE>
 
     function updateQuantity(itemId, delta) {
         const item = cart.find(i => i.id === itemId);
@@ -987,7 +1208,6 @@
                     </div>
                 </div>
             `).join('');
-            // </CHANGE>
             checkoutBtn.disabled = false;
         }
     }
@@ -1021,13 +1241,9 @@
                 cart = [];
                 updateCart();
                 toggleCart();
-
-                //TODO: fix this
-               
                 }
                 });
-            
-            //openReceipt(data);
+
             const data = {
                     items: [
                         { itemName: "California Roll", itemPrice: 10.99 },
@@ -1040,31 +1256,26 @@
                 };
             let query = `?subTotal=${data.subTotal}&tax=${data.tax}&total=${data.total}&amountPaid=${data.amountPaid}`;
             query += "&base64UrlEncoded=" + btoa(data.items);
-            // window.open('http://localhost:8080/receipt' + query, '_blank').focus();
         } else {
             alert(`You currently have ${cart.length} items inside of your cart. Please add something to checkout.`)
         }
     }
 
     function openReceipt(receiptData) {
-        // Create a form
         const form = document.createElement("form");
         form.method = "POST";
         form.action = "http://localhost:8080/receipt";
-        form.target = "_blank"; // open in new tab
+        form.target = "_blank";
 
-        // Add hidden input with JSON data
         const input = document.createElement("input");
         input.type = "hidden";
         input.name = "receiptData";
         input.value = JSON.stringify(receiptData);
         form.appendChild(input);
 
-        // Add form to body and submit
         document.body.appendChild(form);
         form.submit();
 
-        // Clean up
         document.body.removeChild(form);
     }
 
@@ -1082,7 +1293,70 @@
         renderMenu()
     }
 
-    // Initialize
+    function openAddItemModal() {
+        document.getElementById('addItemOverlay').classList.add('active');
+        document.getElementById('addItemModal').classList.add('active');
+        document.getElementById('addItemForm').reset();
+    }
+
+    function closeAddItemModal() {
+        document.getElementById('addItemOverlay').classList.remove('active');
+        document.getElementById('addItemModal').classList.remove('active');
+    }
+
+    function submitNewItem() {
+        const form = document.getElementById('addItemForm');
+
+        // Validate form
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+        }
+
+        // Gather form data
+        const itemData = {
+            category: document.getElementById('itemCategory').value,
+            name: document.getElementById('itemName').value,
+            price: parseFloat(document.getElementById('itemPrice').value),
+            isAlcohol: document.getElementById('itemIsAlcohol').checked,
+            isCold: document.getElementById('itemIsCold').checked,
+            ingredients: document.getElementById('itemIngredients').value || "",
+            spiceLevel: parseInt(document.getElementById('itemSpiceLevel').value) || 0
+        };
+
+        // Make API request
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'User-Agent': 'insomnia/12.0.0'
+            },
+            body: JSON.stringify(itemData)
+        };
+
+        fetch('http://localhost:8080/api/menu/addItem', options)
+            .then(response => response.text()) // Changed from .json() to .text() to handle CSV response
+            .then(csvResponse => {
+                console.log('[v0] API Response (CSV):', csvResponse);
+                const parts = csvResponse.split('|');
+                const addedName = parts[0];
+
+                alert(`✓ ${addedName} has been added to the menu!`);
+                closeAddItemModal();
+
+                // Refresh menu data
+                return fetch("http://localhost:8080/api/menu");
+            })
+            .then(res => res.json())
+            .then(data => {
+                menuData = data;
+                renderMenu();
+            })
+            .catch(err => {
+                console.error('Error adding item:', err);
+                alert('Failed to add item. Please try again.');
+            });
+    }
     renderMenu();
 </script>
 </body>

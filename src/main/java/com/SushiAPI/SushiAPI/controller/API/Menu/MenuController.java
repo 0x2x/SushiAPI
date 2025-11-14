@@ -75,7 +75,7 @@ public class MenuController {
             csvChoice = "Rolls";
         }
         main.items.add(item); // add to menu
-        Files.writeFile("files/menus/" + csvChoice + ".csv", true, item.toString());
+        Files.writeFile("files/menus/" + csvChoice + ".csv", true,  "\n" + item.toCsv());
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(item.toCsv() + "\n");
     }
 
