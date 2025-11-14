@@ -1,6 +1,6 @@
 ## 🍣 Super Sushi: A Spring Boot REST API Project 🚀
 
-This project, **Super Sushi**, is a **Spring Boot** application written in **Java** that demonstrates the development of a **REST API**. Beyond the core application functionality, it serves as a practical example of **version control best practices**, showcasing a clear history of committed features, bug fixes, and subsequent refactoring.
+This project, **Super Sushi**, is a **Spring Boot** application written in **Java** that demonstrates the development of a **REST API** and using **OOP**. Beyond the core application functionality, it serves as a practical example of **version control best practices**, showcasing a clear history of committed features, bug fixes, and subsequent refactoring.
 
 -----
 
@@ -9,7 +9,7 @@ This project, **Super Sushi**, is a **Spring Boot** application written in **Jav
 * **RESTful API Implementation:** Super Sushi establishes a functional REST API, with its specific endpoints and structure detailed within the project's subfolders.
 * **Version Control Demonstration:** The project's commit history is an intentional artifact, illustrating the cyclical process of **committing features, encountering/fixing bugs, and re-fixing/refactoring** the codebase for improved stability and clarity.
 * **Web Application Foundation:** The choice of a web application provides a tangible platform for interacting with the developed API.
-
+* **OOP:** Using polymorphisms, interfaces, abstract and extending keywords.
 -----
 
 ### 🎨 User Interface Development Disclaimer
