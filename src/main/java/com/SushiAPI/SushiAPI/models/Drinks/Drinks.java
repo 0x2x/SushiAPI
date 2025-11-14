@@ -48,4 +48,14 @@ public abstract class Drinks extends item implements MenuItem {
                 ", isAlcohol=" + isAlcohol +
                 '}';
     }
+
+    @Override
+    public String toCsv() {
+//        name|price|size|hot|alcohol
+        if(isCold) {
+            return name + "|" + price + "|" + 14 + "|" + isCold + "|" + isAlcohol;
+
+        }
+        return name + "|" + price + "|" + 14 + "|" + isCold + "|" + isAlcohol;
+    }
 }

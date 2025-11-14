@@ -32,10 +32,9 @@ public class ReceiptService {
         stringBuilder.append("=========ORDER ITEMS================").append("\n");
         main.ReceiptItems.forEach(item -> {
             stringBuilder.append(item.getName()).append("\t\t\t\t$").append(item.getPrice()).append("\n");
-            stringBuilder.append(String.join(", ", item.getExtras())).append("\t $" ).append("\n");
+            stringBuilder.append("\t=>").append(String.join(", ", item.getExtras())).append("\t " ).append("\n");
             Subtotal.updateAndGet(v -> new Double((double) (v + item.getPrice())));
         });
-
         double originalNumber = Subtotal.get();
         double amountToAdd = originalNumber * tax;
         double Paid = originalNumber + amountToAdd;
@@ -43,10 +42,10 @@ public class ReceiptService {
         stringBuilder.append("Subtotal: $").append(Subtotal.get()).append("\n");
         stringBuilder.append("tax: $").append(amountToAdd).append("\n");
         stringBuilder.append("==========TOTAL====================").append("\n");
-        stringBuilder.append("total: $").append(Paid).append("\n");
+        stringBuilder.append("total: $").append(String.format("%.2f", Paid)).append("\n");
         stringBuilder.append("============================").append("\n");
         stringBuilder.append("Payment Method: ").append(paymentMethod).append("\n");
-        stringBuilder.append("Paid: $").append(Paid).append("\n");
+        stringBuilder.append("Paid: $").append(String.format("%.2f", Paid)).append("\n");
         stringBuilder.append("--------------UNFORMATTED-------------------------").append("\n");
         main.ReceiptItems.forEach(item -> {
             if(item instanceof Soda) {

@@ -41,4 +41,10 @@ public abstract class Appetizer extends item implements MenuItem {
                 ", category='" + category + '\'' +
                 '}';
     }
+
+    @Override
+    public String toCsv() {
+        boolean spicy = spiceLevel > 0;
+        return name + "|" + price + "|" + ingredients + "|" + spicy + "|" + 1 ;
+    }
 }

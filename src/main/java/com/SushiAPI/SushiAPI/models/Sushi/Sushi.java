@@ -42,5 +42,12 @@ public abstract class Sushi extends item implements MenuItem {
                 '}';
     }
 
+    @Override
+    public String toCsv() {
+//        name|price|SpiceLevel|ingredients|raw|extra
+        // name|price|SpiceLevel|ingredients|raw|extra
+        return name + "|" + price + "|" + spiceLevel + "|" + ingredients + "|" + true + "|" + extras;
+    }
+
 
 }

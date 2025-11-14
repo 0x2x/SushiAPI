@@ -17,4 +17,5 @@ public interface MenuItem {
     boolean isAlcohol();
     void setId(int id);
     int getId();
+    String toCsv();
 }

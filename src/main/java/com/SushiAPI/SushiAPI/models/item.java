@@ -116,4 +116,12 @@ public class item implements MenuItem{
     public void setDrink(boolean drink) {
         this.drink = drink;
     }
+
+
+    @Override
+    public String toCsv() {
+//        name|price|SpiceLevel|ingredients|raw|extra
+        // name|price|SpiceLevel|ingredients|raw|extra
+        return name + "|" + price + "|" + spiceLevel + ingredients + "|" + true + "|" + extras;
+    }
 }
