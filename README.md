@@ -60,8 +60,7 @@ public String showReceipt(Model model, @RequestBody String receiptData) {
 
 -----
 ## 🌐 FrontEnd Images: Home page
-![img_1.png](img_1.png)
-
+![img_3.png](img_3.png)
 
 -----
 ## 🧭 API ROUTES

@@ -40,7 +40,7 @@ public class MenuController {
     @PostMapping("/api/menu/addItem")
     public ResponseEntity<String> addMenuItem(@RequestBody String addItem) {
         JSONObject jsonObject = new JSONObject(addItem);
-
+        // grab body data
         String itemType = jsonObject.getString("category");
         String[] itemIngredients = jsonObject.getString("ingredients").split(",");
         String itemName = jsonObject.getString("name");
