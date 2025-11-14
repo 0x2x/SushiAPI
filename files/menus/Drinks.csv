@@ -1,7 +1,7 @@
 name|price|size|hot|alcohol
-Ramune Soda|14|5|false|false
+Ramune Soda|3|5|false|false
 Soda|2.95|12|false|false
-Sparking Soda|14|5|false|false
-Orange Juice|12|5|false|false
-Apple Juice|12|5|false|false
-Sake|12|5|false|true
+Sparking Soda|3|5|false|false
+Orange Juice|3|5|false|false
+Apple Juice|3|5|false|false
+Sake|3|5|false|true
